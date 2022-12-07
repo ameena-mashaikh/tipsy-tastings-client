@@ -16,7 +16,7 @@ export const NavBar = ({ token, setToken }) => {
   return (
     <nav className="navbar is-success mb-3" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-
+        
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
           <span aria-hidden="true"></span>

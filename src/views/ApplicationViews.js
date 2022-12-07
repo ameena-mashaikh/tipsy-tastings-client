@@ -7,12 +7,12 @@ import { Authorized } from "./Authorized"
 export const ApplicationViews = ({token, setToken}) => {
     return <>
         <Routes>
-        <Route path="/login" element={<Login  setToken={setToken} />} />
-        <Route path="/register" element={<Register  setToken={setToken} />} />
-        <Route element={<Authorized  setToken={setToken} />}>
-            
-            <Route path="/cocktails" element={<Cocktails />} />
-        </Route>
+            <Route path="/login" element={<Login  setToken={setToken} />} />
+            <Route path="/register" element={<Register  setToken={setToken} />} />
+            <Route element={<Authorized  setToken={token} />}>
+                
+                <Route path="/cocktails" element={<Cocktails />} />
+            </Route>
         </Routes>
     </>
 }
