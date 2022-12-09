@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from "react"
-import { useParams, useNavigate } from "react-router-dom"
 
-export const Cocktails = () => {
-    <></>
+export const Cocktails = ({id, category, created_by_mixologist, image, liqueurs, liquors, name, recipe, staple_ingredients}) => {
+    return <div>
+        
+    </div>
 }
