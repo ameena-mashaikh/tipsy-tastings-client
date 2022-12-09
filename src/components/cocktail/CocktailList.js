@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktails } from "../../managers/CocktailManager"
+import "./Cocktails.css"
 
 export const CocktailList = () => {
         const [cocktails, setCocktails] = useState([])
@@ -22,11 +23,11 @@ export const CocktailList = () => {
     
     
     
-        return <div className = "mixologist_cocktail_list">
+        return <div className = "cocktail_list">
             {
                 cocktails.map(cocktail => {
-                    return <div className = "cocktail-item">
-                            <h3> <Link>{cocktail.name}</Link></h3>
+                    return <div className = "cocktail-item" key = {cocktail.id}>
+                            <h3> <Link to = {`/cocktails/${cocktail.id}`}>{cocktail.name}</Link></h3>
                             <img className = "cocktail-image" src= {cocktail.image}/>
                         
                         </div>

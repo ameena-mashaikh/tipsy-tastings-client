@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktailsByMixologist } from "../../managers/CocktailManager"
 
-export const MyCocktails = () => {
+export const MyCocktailPosts = () => {
         const [cocktails, setCocktails] = useState([])
         const navigate = useNavigate()
     
@@ -22,8 +22,15 @@ export const MyCocktails = () => {
     
     
     
-        return <div className = "mixologist_cocktail_list">
-            
+        return <div className = "mixologist_cocktails">
+            {
+                cocktails.map(cocktail => {
+                    return <div className = "cocktail-item" key = {cocktail.id}>
+                            <Link to = {`/my_cocktails/${cocktail.id}`}><img className = "cocktail-image" src= {cocktail.image}/></Link>
+                        </div>
+                })
+            }
+            <button>Add New Cocktail</button>
         </div>
             
     }
