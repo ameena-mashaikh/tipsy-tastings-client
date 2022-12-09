@@ -30,7 +30,7 @@ export const MyCocktailPosts = () => {
                         </div>
                 })
             }
-            <button>Add New Cocktail</button>
+            <button className = "new_cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>Add A New Cocktail</button>
         </div>
             
     }
