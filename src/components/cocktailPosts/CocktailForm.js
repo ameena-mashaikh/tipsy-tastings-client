@@ -4,32 +4,38 @@ import Select from "react-select"
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailPosts.css"
+import { createCocktail } from "../../managers/CocktailManager"
+import { createCocktailLiquor } from "../../managers/CocktailngredientManager"
 
 export const CocktailPostForm = () => {
     const [liquors, setLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
     const [categories, setCategories] = useState([])
-    const [showLiquorForm, setShowLiquorForm] = useState(false)
-    const [index, setIndex] = useState(0)
+    const [showLiquors, setShowLiquors] = useState(false)
+    const [showLiqueurs, setShowLiqueurs] = useState(false)
+    const [showStapleIngredients, setShowStapleIngredients] = useState(false)
 
-    const [cocktail, newCocktail] = useState({
+    const navigate = useNavigate()
+
+
+    const [selectedLiquors, updateSelectedLiquors] = useState(new Set())
+    const [selectedLiqueurs, updateSelectedLiqueurs] = useState(new Set())
+    const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState(new Set())
+
+    const [currentCocktail, setCurrentCocktail] = useState({
         name: '',
         category: 0,
         recipe: "",
         image: "",
-        createdByMixologist: 0,
-        liquors: 0,
-        liqueurs: 0,
-        liqueurs: 0
+        createdByMixologist: 0
     })
 
 
     const [cocktailLiquor, newCocktailLiquor] = useState({
         cocktailId: 0,
-        liquorId: 0,
-        quantity: 0
-    })
+        liquorId: 0
+        })
 
     
     const [cocktailPost, newCocktailPost] = useState({
@@ -56,33 +62,128 @@ export const CocktailPostForm = () => {
     }, [])
 
 
-    const loadMore = () => {
-        setIndex(index+1)
+    const changeCocktailState= (domEvent) => {
+        const copy = {...currentCocktail}
+        copy[domEvent.target.id] = domEvent.target.value
+        setCurrentCocktail(copy)
+    }
+
+    const LiquorCheckboxes = () => {
+        let html = []
+        liquors.map((liquor) => {
+            if (showLiquors) {
+                html.push(
+                    <div className = "liquor_checkboxes" key = {`liquor--${liquor.id}`}>
+                        <ul>
+                            <label>
+                                <input
+                                    type = "checkbox"
+                                    key = {`liquor--${liquor.id}`}
+                                    value = {parseInt(liquor.id)}
+                                    onChange={(event) => {
+                                        const copy = new Set(selectedLiquors)
+                                        if (copy.has(liquor.id)){
+                                            copy.delete(liquor.id)
+                                        }
+                                        else {
+                                            copy.add(liquor.id)
+                                        }
+                                        
+                                        updateSelectedLiquors(copy)
+                                    }
+                                    }
+                                />
+                                {liquor.label}
+                            </label>
+                        </ul>
+                    </div>
+                )   
+            }
+
+            else {
+                <div></div>
+            }
+        })
+        return html
     }
 
 
-    const LiquorSelect = () => {
-        if (showLiquorForm){
-            return  (<div className = "liquor_input">
-                <input type = "number" className = "liquor_quantity" placeholder="0" step = ".25"/>
-                <label>oz</label>
-                <Select
-                placeholder = "Select Liquors"
-                className = "liquor_select"
-                options ={
-                    liquors.map((liquor) => {
-                        return {
-                            label: liquor.label,
-                            value: liquor.id
-                        }
-                    })
-                }
-                isSearchable = {true}
-            />
-            <button>Add Liquor to Cocktail</button></div>)}
-        else{
-            return <div></div>
-        }
+    const LiqueurCheckboxes = () => {
+        let html = []
+        liqueurs.map((liqueur) => {
+            if (showLiqueurs) {
+                html.push(
+                    <div className = "liqueur_checkboxes" key = {`liqueur--${liqueur.id}`}>
+                        <ul>
+                            <label>
+                                <input
+                                    type = "checkbox"
+                                    key = {`liqueur--${liqueur.id}`}
+                                    value = {parseInt(liqueur.id)}
+                                    onChange={(event) => {
+                                        const copy = new Set(selectedLiqueurs)
+                                        if (copy.has(liqueur.id)){
+                                            copy.delete(liqueur.id)
+                                        }
+                                        else {
+                                            copy.add(liqueur.id)
+                                        }
+                                        
+                                        updateSelectedLiqueurs(copy)
+                                    }
+                                    }
+                                />
+                                {liqueur.name}
+                            </label>
+                        </ul>
+                    </div>
+                )   
+            }
+
+            else {
+                <div></div>
+            }
+        })
+        return html
+    }
+
+    const StapleIngredientCheckboxes = () => {
+        let html = []
+        stapleIngredients.map((staple) => {
+            if (showStapleIngredients) {
+                html.push(
+                    <div className = "staples_checkboxes" key = {`stapleIngredients--${staple.id}`}>
+                        <ul>
+                            <label>
+                                <input
+                                    type = "checkbox"
+                                    key = {`stapleIngredients--${staple.id}`}
+                                    value = {parseInt(staple.id)}
+                                    onChange={(event) => {
+                                        const copy = new Set(selectedStapleIngredients)
+                                        if (copy.has(staple.id)){
+                                            copy.delete(staple.id)
+                                        }
+                                        else {
+                                            copy.add(staple.id)
+                                        }
+                                        
+                                        updateSelectedStapleIngredients(copy)
+                                    }
+                                    }
+                                />
+                                {staple.name}
+                            </label>
+                        </ul>
+                    </div>
+                )   
+            }
+
+            else {
+                <div></div>
+            }
+        })
+        return html
     }
 
 
@@ -94,22 +195,52 @@ export const CocktailPostForm = () => {
             <h3 className = "new_cocktail_header">New Cocktail Post</h3>
                 <div className = "new__cocktail">
                     <label className = "new_cocktail_label">Cocktail Name: </label>
-                    <input type = 'text' className = "new_cocktail_input"/>
+                    <input onChange={changeCocktailState}
+                        type="text" id = 'name' 
+                        required autoFocus className="form-control"/>
+
                     <div className = "ingredient_list">
-                        <button onClick={(event) => 
-                            {
-                                event.preventDefault()
-                                setShowLiquorForm(true)
-                                loadMore()
-                            }
-                        }>Add New Liquor</button>
-                        {LiquorSelect()}</div>
+                        <div className = "liquor_select">
+                            <button onClick={(event) => 
+                                {
+                                    event.preventDefault()
+                                    setShowLiquors(true)
+                                }
+                            }>
+                                Add Liquors</button>
+                                {LiquorCheckboxes()}
+                        </div>
+
+                        <div className = "liqueur_select">
+                            <button onClick={(event) => 
+                                {
+                                    event.preventDefault()
+                                    setShowLiqueurs(true)
+                                }
+                            }>
+                                Add Liqueurs</button>
+                                {LiqueurCheckboxes()}
+                        </div>
+
+                        <div className = "staple_ingredients_select">
+                            <button onClick={(event) => 
+                                {
+                                    event.preventDefault()
+                                    setShowStapleIngredients(true)
+                                }
+                            }>
+                                Add Staple Ingredients</button>
+                                {StapleIngredientCheckboxes()}
+                        </div>
+                        
+                    </div>
                     
                     <label className = "new_cocktail_category"> Category: </label>
                     <select
+                            onChange={changeCocktailState}
                             required autoFocus
-                            className = "form-control"
-                            value = {categories.id}>
+                            id = "category"
+                            className = "form-control">
                                 <option value = "0"> Select Category</option>
                             {
                                 categories.map(category => {
@@ -119,18 +250,55 @@ export const CocktailPostForm = () => {
                     </select>
                     <div> 
                         <label className = "new_cocktail_image">Cocktail Image URL</label>
-                        <input type = 'text' className = "new_cocktail_image"/>
+                        <input 
+                            id = "image"
+                            onChange={changeCocktailState}
+                            type = 'text' className = "new_cocktail_image"/>
                     </div>
                     <div>
                         <label className = "new_cocktail_recipe">Recipe: </label>
-                        <input type = 'textarea' className = "new_cocktail_recipe"/>
+                        <input 
+                            id = "recipe"
+                            onChange={changeCocktailState}
+                            type = 'textarea'  className = "new_cocktail_recipe"/>
                     </div>
                     <div>
                         <label className = "new_cocktail_caption">Post Caption: </label>
-                        <input type = 'textarea' className = "new_cocktail_caption"/>
+                        <input 
+                            onChange={changeCocktailState}
+                            id = "caption"
+                            type = 'textarea' className = "new_cocktail_caption"/>
                     </div>
                     <div>
-                        <button className = "submit_cocktail"> Create Cocktail Post</button>
+                        <button type ="submit" className = "submit_cocktail"
+                            onClick={evt => {
+                                // Prevent form from being submitted
+                                evt.preventDefault()
+            
+                                const cocktailObj = {
+                                    name: currentCocktail.name,
+                                    category: parseInt(currentCocktail.category),
+                                    recipe: currentCocktail.recipe,
+                                    image: currentCocktail.image,
+                                    created_by_mixologist: currentCocktail.createdByMixologist
+                                }
+            
+                                // Send POST request to your API
+                                createCocktail(cocktailObj)
+                                    .then((newCreatedCocktail) => {
+                                        const liquorArray = Array.from(selectedLiquors)
+                                        const promiseLiquorArray = liquorArray.map((liquorId) => {
+                                            const liquorObjToPost = {
+                                                cocktail: newCreatedCocktail.id,
+                                                liquor: liquorId
+                                            }
+                                            createCocktailLiquor(liquorObjToPost)
+                                            .then(() => navigate("/my_cocktails"))
+                                        }) 
+                                    }
+                                    )
+                            }}
+                        > Create Cocktail Post</button>
                     </div>
                     
                         
@@ -144,74 +312,3 @@ export const CocktailPostForm = () => {
 
 
 
-
-
-
-                        {/* <select
-                            required autoFocus
-                            className = "form-control"
-                            value = {liquors.id}
-                            // onChange = {(event) => {
-                            //     const valueParse = (event.target.value)
-                            //     liquors.map(liquor => {
-    
-                            //     })
-                            // }}
-                            >
-                            <option value = "0">Select Liquors</option>
-                            {
-                                liquors.map(liquor => {
-                                    return <option key = {liquor.id} value = {liquor.id}> {liquor.name}</option>
-                                })
-                            }
-                        </select> */}
-
-
-//! SELECT for liquors, liqueurs, and staples
-                    {/*<div><input className = "recipe" placeholder="recipe"></input></div>
-                 <div className = "liquor_select">
-                    <button> Add Liquor</button>
-                    <Select
-                        placeholder = "Select Liquors"
-                        options ={
-                            liquors.map((liquor) => {
-                                return {
-                                    label: liquor.label,
-                                    value: liquor.id
-                                }
-                            })
-                        }
-                        isMulti
-                        isSearchable = {true}
-                    />
-                </div>
-                <div className = "liqueur_select"> 
-                <Select
-                        placeholder = "Select Liqueurs"
-                        isMulti
-                        options ={
-                            liqueurs.map((liqueur) => {
-                                return {
-                                    label: liqueur.name,
-                                    value: liqueur.id
-                                }
-                            })
-                        }
-                        />
-                        
-                </div>
-                <div className = "staple_ingredient_select"> 
-                <Select
-                        placeholder = "Select Staple Ingredients"
-                        isMulti
-                        options ={
-                            stapleIngredients.map((staple) => {
-                                return {
-                                    label: staple.name,
-                                    value: staple.id
-                                }
-                            })
-                        }
-                        />
-                        
-                </div> */}

@@ -25,3 +25,16 @@ export const getCocktailById = (id) => {
         .then(response => response.json())
 }
 
+export const createCocktail = (newCocktailObject) => {
+    return fetch("http://localhost:8000/cocktails", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+
+        },
+        body: JSON.stringify(newCocktailObject)
+    })
+        .then(res => res.json())
+}
