@@ -6,6 +6,7 @@ import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailPosts.css"
 import { createCocktail } from "../../managers/CocktailManager"
 import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
+import { createCocktailPost } from "../../managers/CocktailPostManager"
 
 export const CocktailPostForm = () => {
     const [liquors, setLiquors] = useState([])
@@ -32,16 +33,11 @@ export const CocktailPostForm = () => {
     })
 
 
-    const [cocktailLiquor, newCocktailLiquor] = useState({
-        cocktailId: 0,
-        liquorId: 0
-        })
 
     
-    const [cocktailPost, newCocktailPost] = useState({
+    const [currentCocktailPost, setCurrentCocktailPost] = useState({
         cocktailId: 0,
-        caption: '',
-        mixologist: 0
+        caption: ''
     })
     
     
@@ -66,6 +62,12 @@ export const CocktailPostForm = () => {
         const copy = {...currentCocktail}
         copy[domEvent.target.id] = domEvent.target.value
         setCurrentCocktail(copy)
+    }
+
+    const changeCocktailPostState= (domEvent) => {
+        const copy = {...currentCocktailPost}
+        copy[domEvent.target.id] = domEvent.target.value
+        setCurrentCocktailPost(copy)
     }
 
     const LiquorCheckboxes = () => {
@@ -315,6 +317,16 @@ export const CocktailPostForm = () => {
                                             createCocktailStapleIngredient(StapleIngredientObjToPost)
                                             .then(() => navigate("/my_cocktails"))
                                         })
+
+                                        const cocktailPostObj = {
+                                            cocktail: newCreatedCocktail.id,
+                                            caption: currentCocktail.caption
+                                        }
+                                        createCocktailPost(cocktailPostObj)
+                                        .then(() => navigate('/my_cocktails'))
+                                        
+
+
                                     }
                                     )
                             }}
