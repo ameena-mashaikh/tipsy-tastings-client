@@ -23,6 +23,7 @@ export const MyCocktailPosts = () => {
     
     
         return <div className = "mixologist_cocktails">
+            <button className = "new_cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>Add A New Cocktail</button>
             {
                 cocktails.map(cocktail => {
                     return <div className = "cocktail-item" key = {cocktail.id}>
@@ -30,7 +31,6 @@ export const MyCocktailPosts = () => {
                         </div>
                 })
             }
-            <button className = "new_cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>Add A New Cocktail</button>
         </div>
             
     }

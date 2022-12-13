@@ -5,7 +5,7 @@ import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/In
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailPosts.css"
 import { createCocktail } from "../../managers/CocktailManager"
-import { createCocktailLiquor } from "../../managers/CocktailngredientManager"
+import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
 
 export const CocktailPostForm = () => {
     const [liquors, setLiquors] = useState([])
@@ -294,7 +294,27 @@ export const CocktailPostForm = () => {
                                             }
                                             createCocktailLiquor(liquorObjToPost)
                                             .then(() => navigate("/my_cocktails"))
-                                        }) 
+                                        })
+
+                                        const liqueurArray = Array.from(selectedLiqueurs)
+                                        const promiseLiqueurArray = liqueurArray.map((liqueurId) => {
+                                            const liqueurObjToPost = {
+                                                cocktail: newCreatedCocktail.id,
+                                                liqueur: liqueurId
+                                            }
+                                            createCocktailLiqueur(liqueurObjToPost)
+                                            .then(() => navigate("/my_cocktails"))
+                                        })
+
+                                        const stapleIngredientsArray = Array.from(selectedStapleIngredients)
+                                        const promiseStapleIngredientsArray = stapleIngredientsArray.map((stapleId) => {
+                                            const StapleIngredientObjToPost = {
+                                                cocktail: newCreatedCocktail.id,
+                                                staple_ingredient: stapleId
+                                            }
+                                            createCocktailStapleIngredient(StapleIngredientObjToPost)
+                                            .then(() => navigate("/my_cocktails"))
+                                        })
                                     }
                                     )
                             }}
