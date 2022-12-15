@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import { getCocktailById } from "../../managers/CocktailManager"
+import { getCocktailById, deleteCocktail } from "../../managers/CocktailManager"
 import "./CocktailPosts.css"
 
 export const CocktailPostDetails = () => {
@@ -27,6 +27,15 @@ export const CocktailPostDetails = () => {
                     </div>
                     <p><Link to = {`/cocktails/${cocktailId}`}>Click Here for the Recipe!</Link></p>
                     <button onClick = {() => {navigate(`/my_cocktails/edit/${cocktailId}`)}}>Edit Cocktail</button>
+                    <button onClick = {() => {
+                        const cocktailDelete = {
+                            id: cocktail.id
+                        }
+                        deleteCocktail(cocktailDelete)
+                        .then(() => navigate("/my_cocktails"))                   
+                    }}>
+                        Delete Cocktail</button>
+
 
                 </div>
             </div>

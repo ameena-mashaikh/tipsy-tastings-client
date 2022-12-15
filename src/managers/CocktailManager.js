@@ -50,3 +50,14 @@ export const updateCocktail = (cocktailObj) => {
             body: JSON.stringify(cocktailObj)
          })
 }
+
+export const deleteCocktail = (cocktail) => {
+    return fetch(`http://localhost:8000/cocktails/${cocktail.id}`, {
+        method: "DELETE",    
+        headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tt_token")}`
+            },
+         })
+}

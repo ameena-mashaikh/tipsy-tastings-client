@@ -1,17 +1,21 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktails } from "../../managers/CocktailManager"
+import { getLiquors } from "../../managers/IngredientManager"
 import "./Cocktails.css"
 
 export const CocktailList = () => {
         const [cocktails, setCocktails] = useState([])
         const navigate = useNavigate()
-    
+        const [liquors, setLiquors] = useState([])
     
         useEffect(() => {
             getCocktails().then(setCocktails)
         }, [])
     
+        useEffect(() => {
+            getLiquors().then(setLiquors)
+        }, [])
         // const updatePostList = () => {
         //     getPostsByAuthor().then(setPosts)
         // }
@@ -24,6 +28,16 @@ export const CocktailList = () => {
     
     
         return <div className = "cocktail_list">
+                <select className = "liquors_dropdown">
+                    <option value = "0"> Select Liquor</option>
+                    {
+                        liquors.map(liquor => {
+                            return <option  key = {liquor.id} 
+                            value = {liquor.id}> {liquor.label}</option>
+                        })
+                    }
+
+                </select>
             {
                 cocktails.map(cocktail => {
                     return <div className = "cocktail-item" key = {cocktail.id}>

@@ -104,3 +104,103 @@ export const updateCocktailStapleIngredient = (cocktailStapleObj) => {
             body: JSON.stringify(cocktailStapleObj)
          })
 }
+
+
+export const getCocktailLiquorById = (id) => {
+    return fetch(`http://localhost:8000/cocktailliquors/${id}`, {
+        headers:{
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
+export const getCocktailLiqueurById = (id) => {
+    return fetch(`http://localhost:8000/cocktailliqueurs/${id}`, {
+        headers:{
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
+export const getCocktailStapleIngredientById = (id) => {
+    return fetch(`http://localhost:8000/cocktailstapleingredients/${id}`, {
+        headers:{
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
+export const getAllCocktailLiquor = (id) => {
+    return fetch (`http://localhost:8000/cocktailliquors?cocktail=${id}`,{
+    headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Token ${localStorage.getItem("tt_token")}`
+    }
+    })
+    .then(response => response.json())
+}
+
+export const getAllCocktailLiqueur = (id) => {
+    return fetch (`http://localhost:8000/cocktailliqueurs?cocktail=${id}`,{
+    headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Token ${localStorage.getItem("tt_token")}`
+    }
+    })
+    .then(response => response.json())
+}
+
+export const getAllCocktailStapleIngredient = (id) => {
+    return fetch (`http://localhost:8000/stapleingredients?cocktail=${id}`,{
+    headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Token ${localStorage.getItem("tt_token")}`
+    }
+    })
+    .then(response => response.json())
+}
+
+export const deleteCocktailLiquor = (id) => {
+    return fetch(`http://localhost:8000/cocktailliquors/${id}`, {
+        method: "DELETE",    
+        headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tt_token")}`
+            },
+            })
+}
+
+export const deleteCocktailLiqueur = (id) => {
+    return fetch(`http://localhost:8000/cocktailliqueurs/${id}`, {
+        method: "DELETE",    
+        headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tt_token")}`
+            },
+            })
+}
+
+export const deleteCocktailStapleIngredient = (id) => {
+    return fetch(`http://localhost:8000/cocktailstapleingredients/${id}`, {
+        method: "DELETE",    
+        headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tt_token")}`
+            },
+            })
+}
