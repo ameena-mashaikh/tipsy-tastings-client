@@ -21,24 +21,13 @@ export const CocktailPostDetails = () => {
                 <div className = "cocktail-detail-item">
                     <h3> {cocktail?.name}</h3>
                     <img className = "cocktail-image" src= {cocktail?.image}/>
-                    <div className = "cocktail-ingredients">
-                        <b>Liquors Needed:</b>
-                        {cocktail?.liquors.map(liquor => {
-                            return <div>{liquor.label}</div>
-                        })}
-
-                        <b>Liqueurs Needed:</b>
-                        {cocktail?.liqueurs.map(liqueur => {
-                            return <div>{liqueur.name}</div>
-                        })}
-
-                        <b>Staple Ingredients Needed:</b>
-                        {cocktail?.staple_ingredients.map(staple => {
-                            return <div>{staple.name}</div>
-                        })}
+                    <div className = "cocktail-caption">
+                        <b>Caption: </b>
+                        {cocktail?.post_cocktail.map((post) => {return post?.caption})}
                     </div>
-                    <div className = "cocktail-recipe"> <b>Recipe:</b> {cocktail?.recipe}</div>
-                    <div className = "cocktail-creator"><b>Created By: </b>{cocktail?.created_by_mixologist?.user?.username}</div>
+                    <p><Link to = {`/cocktails/${cocktailId}`}>Click Here for the Recipe!</Link></p>
+                    <button onClick = {() => {navigate(`/my_cocktails/edit/${cocktailId}`)}}>Edit Cocktail</button>
+
                 </div>
             </div>
             

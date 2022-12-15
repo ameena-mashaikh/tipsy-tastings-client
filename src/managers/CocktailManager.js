@@ -38,3 +38,15 @@ export const createCocktail = (newCocktailObject) => {
     })
         .then(res => res.json())
 }
+
+export const updateCocktail = (cocktailObj) => {
+    return fetch(`http://localhost:8000/cocktails/${cocktailObj.id}`, {
+        method: "PUT",    
+        headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tt_token")}`
+            },
+            body: JSON.stringify(cocktailObj)
+         })
+}
