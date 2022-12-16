@@ -4,7 +4,7 @@ import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/In
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailPosts.css"
 import { updateCocktail, getCocktailById} from "../../managers/CocktailManager"
-import { updateCocktailLiqueur, updateCocktailLiquor, updateCocktailStapleIngredient, getAllCocktailLiquor, deleteCocktailLiquor } from "../../managers/CocktailngredientManager"
+import { updateCocktailLiqueur, updateCocktailLiquor, updateCocktailStapleIngredient, getAllCocktailLiquor, deleteCocktailLiquor, createCocktailLiquor } from "../../managers/CocktailngredientManager"
 import { updateCocktailPost, getCocktailPostById, getCocktailPosts } from "../../managers/CocktailPostManager"
 
 
@@ -57,15 +57,25 @@ export const CocktailEdit = () => {
         getCocktailById(cocktailId)
         .then((data)=>{
             setCurrentCocktail(data)
+            const oldSelectedLiquors = new Set()
+            const oldSelectedLiqueurs = new Set()
+            const oldSelectedStaples = new Set()
+
             for (const liquor of data.liquors) {
-                selectedLiquors.add(liquor.id)
+                oldSelectedLiquors.add(liquor.id)
             }
+            updateSelectedLiquors(oldSelectedLiquors)
+            
             for (const liqueur of data.liqueurs) {
-                selectedLiqueurs.add(liqueur.id)
+                oldSelectedLiqueurs.add(liqueur.id)
             }
+            updateSelectedLiqueurs(oldSelectedLiqueurs)
+
             for (const staple of data.staple_ingredients) {
-                selectedStapleIngredients.add(staple.id)  
+                oldSelectedStaples.add(staple.id)  
             }
+            updateSelectedStapleIngredients(oldSelectedStaples)
+
         })
     }, [cocktailId])
 
@@ -126,17 +136,45 @@ export const CocktailEdit = () => {
                                 <input
                                     type = "checkbox"
                                     key = {`liquor--${liquor.id}`}
+                                    // checked = {selectedLiquors.has(liquor.id)}
+                                    // defaultChecked = {
+                                    //     currentCocktail.liquors.find(liq => liq.id === liquor.id) ? true : false
+                                    // }
+                                    defaultChecked = {selectedLiquors.has(liquor.id)}
                                     checked = {selectedLiquors.has(liquor.id)}
-                                    defaultChecked = {
-                                        currentCocktail.liquors.find(liq => liq.id === liquor.id) ? true : false
-                                    }
                                     onChange={(event) => {
                                         const copy = new Set(selectedLiquors)
-                                        if (copy.has(liquor.id)){
-                                            copy.delete(liquor.id)
+                                        if (copy.has(liquor.id))
+                                        {
+                                             copy.delete(liquor.id)
+                                        //     currentCocktailLiquors.map((liq) => {
+                                        //         if (liq.liquor.id === liquor.id) {
+                                        //             return deleteCocktailLiquor(liq.id)
+                                        //         }
+                                        //         // else {
+                                        //         //     const newLiq = {
+                                        //         //         cocktail: currentCocktail.id, 
+                                        //         //         liquor: liquor.id
+                                        //         //     }
+                                        //         //     return createCocktailLiquor(newLiq)
+                                        //         // }
+                                               
+                                            
+                                        //   }
+                                        //   )                                                
+
                                         }
                                         else {
                                             copy.add(liquor.id)
+                                            // currentCocktailLiquors.map((liq) => {
+                                            //     if ((liq.liquor.id !== liquor.id )|| (liq.liquor == [])) {
+                                            //         const newLiq = {
+                                            //             cocktail: currentCocktail.id, 
+                                            //             liquor: liquor.id
+                                            //         }
+                                            //         return createCocktailLiquor(newLiq)
+                                            //     }
+                                            // })
                                         }
                                         
                                         updateSelectedLiquors(copy)
@@ -170,10 +208,14 @@ export const CocktailEdit = () => {
                                     type = "checkbox"
                                     key = {`liqueur--${liqueur.id}`}
                                     value = {currentCocktail?.liqueurs?.id}
+                                    // checked = {selectedLiqueurs.has(liqueur.id)}
+                                    // defaultChecked = {
+                                    //     currentCocktail.liqueurs.find(liq => liq.id === liqueur.id) ? true : false
+                                    // }
+
+                                    defaultChecked = {selectedLiqueurs.has(liqueur.id)}
                                     checked = {selectedLiqueurs.has(liqueur.id)}
-                                    defaultChecked = {
-                                        currentCocktail.liqueurs.find(liq => liq.id === liqueur.id) ? true : false
-                                    }
+
                                     onChange={(event) => {
                                         const copy = new Set(selectedLiqueurs)
                                         if (copy.has(liqueur.id)){
@@ -213,10 +255,12 @@ export const CocktailEdit = () => {
                                     type = "checkbox"
                                     key = {`stapleIngredients--${staple.id}`}
                                     value = {parseInt(staple.id)}
+                                    // checked = {selectedStapleIngredients.has(staple.id)}
+                                    // defaultChecked = {
+                                    //     currentCocktail.staple_ingredients.find(stap => stap.id === staple.id) ? true : false
+                                    // }
+                                    defaultChecked = {selectedStapleIngredients.has(staple.id)}
                                     checked = {selectedStapleIngredients.has(staple.id)}
-                                    defaultChecked = {
-                                        currentCocktail.staple_ingredients.find(stap => stap.id === staple.id) ? true : false
-                                    }
                                     onChange={(event) => {
                                         const copy = new Set(selectedStapleIngredients)
                                         if (copy.has(staple.id)){
@@ -341,7 +385,7 @@ export const CocktailEdit = () => {
                                 evt.preventDefault()
             
                                 const updateCocktailObj = {
-                                    id: currentCocktail.id,
+                                    id: currentCocktail.id, 
                                     name: currentCocktail.name,
                                     category: parseInt(chosenCategory),
                                     recipe: currentCocktail.recipe,
@@ -354,6 +398,7 @@ export const CocktailEdit = () => {
             
                                 // Send POST request to your API
                                 updateCocktail(updateCocktailObj)
+                                .then(() => navigate("/my_cocktails"))
                                     // .then((newlyUpdatedCocktail) => {
                                     //     const liquorArray = Array.from(selectedLiquors)
                                     //     const promiseLiquorArray = liquorArray.map((liquorId) => {
