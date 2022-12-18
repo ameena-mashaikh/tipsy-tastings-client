@@ -61,3 +61,14 @@ export const deleteCocktail = (cocktail) => {
             },
          })
 }
+
+export const newestCocktails = (cocktail) => {
+    return fetch("http://localhost:8000/cocktails?feed", {
+        headers:{
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+        }
+    })
+        .then(response => response.json())
+}

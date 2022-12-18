@@ -447,6 +447,8 @@ export const CocktailEdit = () => {
                                     // )
                             }}
                         > Update Cocktail Post</button>
+                        <button onClick = {() => {navigate(`/my_cocktails/${cocktailId}`)}}>Cancel</button>
+
                     </div>
                     
                         
