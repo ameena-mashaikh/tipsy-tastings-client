@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
-//import "./NavBar.css"
+import "./NavBar.css"
 
 
 export const NavBar = ({ token, setToken }) => {
@@ -31,18 +31,17 @@ export const NavBar = ({ token, setToken }) => {
             token
               ?
               <>
-                <Link to="/cocktails" className="navbar-item">Cocktails</Link>
+                <Link to="/my_feed" className="navbar-item">My Feed</Link>
+                <Link to="/explore_cocktails" className="navbar-item">Explore Cocktails</Link>
+                <Link to="/my_cocktails" className="navbar-item">My Cocktails</Link>
+                <Link to="/profile" className="navbar-item">Profile </Link>
+
                 
               </>
               :
               ""
           }
-        </div>
-
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              {
+                        {
                 token
                   ?
                   <button className="button is-outlined" onClick={() => {
@@ -55,6 +54,24 @@ export const NavBar = ({ token, setToken }) => {
                     <Link to="/login" className="button is-outlined">Login</Link>
                   </>
               }
+        </div>
+
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              {/* {
+                token
+                  ?
+                  <button className="button is-outlined" onClick={() => {
+                    setToken('')
+                    navigate('/login')
+                  }}>Logout</button>
+                  :
+                  <>
+                    <Link to="/register" className="button is-link">Register</Link>
+                    <Link to="/login" className="button is-outlined">Login</Link>
+                  </>
+              } */}
             </div>
           </div>
         </div>

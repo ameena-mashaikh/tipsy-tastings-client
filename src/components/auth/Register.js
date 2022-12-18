@@ -29,7 +29,7 @@ export const Register = () => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("tt_token", res.token)
-                        navigate("/login")
+                        navigate("/my_cocktails")
                     }
                 })
         } else {
@@ -68,7 +68,7 @@ export const Register = () => {
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    <label htmlFor="verifyPassword"> Tell Us About Yourself: </label>
                     <textarea ref={bio} name="bio" className="form-control" placeholder="Let other mixologists know a little bit about you..." />
                 </fieldset>
                 <fieldset style={{
