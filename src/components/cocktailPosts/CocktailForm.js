@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import Select from "react-select"
+
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailPosts.css"
@@ -64,10 +65,22 @@ export const CocktailPostForm = () => {
         setCurrentCocktail(copy)
     }
 
-    const changeCocktailPostState= (domEvent) => {
-        const copy = {...currentCocktailPost}
-        copy[domEvent.target.id] = domEvent.target.value
-        setCurrentCocktailPost(copy)
+    const showWidget = (event) => {
+        event.preventDefault()
+    
+        let widget = window.cloudinary.createUploadWidget(
+            { 
+            cloudName: `dnilbxkjf`,
+            uploadPreset: `tipsy_uploads`
+            },
+        (error, result) => {
+          if (!error && result && result.event === "success") { 
+            console.log(result.info.url)
+            const copy = structuredClone(currentCocktail)
+            copy.image = result.info.url
+            setCurrentCocktail(copy)
+        }})
+        widget.open()
     }
 
     const LiquorCheckboxes = () => {
@@ -251,11 +264,10 @@ export const CocktailPostForm = () => {
                             }
                     </select>
                     <div> 
-                        <label className = "new_cocktail_image">Cocktail Image URL</label>
-                        <input 
-                            id = "image"
-                            onChange={changeCocktailState}
-                            type = 'text' className = "new_cocktail_image"/>
+                        <label className = "new_cocktail_image">Cocktail Image: </label>
+                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
+                        <div>Image Preview: </div>
+                        <img src={currentCocktail.image} width="100px"/>
                     </div>
                     <div>
                         <label className = "new_cocktail_recipe">Recipe: </label>
@@ -289,7 +301,7 @@ export const CocktailPostForm = () => {
                                 createCocktail(cocktailObj)
                                     .then((newCreatedCocktail) => {
                                         const liquorArray = Array.from(selectedLiquors)
-                                        const promiseLiquorArray = liquorArray.map((liquorId) => {
+                                        liquorArray.map((liquorId) => {
                                             const liquorObjToPost = {
                                                 cocktail: newCreatedCocktail.id,
                                                 liquor: liquorId
@@ -299,7 +311,7 @@ export const CocktailPostForm = () => {
                                         })
 
                                         const liqueurArray = Array.from(selectedLiqueurs)
-                                        const promiseLiqueurArray = liqueurArray.map((liqueurId) => {
+                                        liqueurArray.map((liqueurId) => {
                                             const liqueurObjToPost = {
                                                 cocktail: newCreatedCocktail.id,
                                                 liqueur: liqueurId
@@ -309,7 +321,7 @@ export const CocktailPostForm = () => {
                                         })
 
                                         const stapleIngredientsArray = Array.from(selectedStapleIngredients)
-                                        const promiseStapleIngredientsArray = stapleIngredientsArray.map((stapleId) => {
+                                        stapleIngredientsArray.map((stapleId) => {
                                             const StapleIngredientObjToPost = {
                                                 cocktail: newCreatedCocktail.id,
                                                 staple_ingredient: stapleId
