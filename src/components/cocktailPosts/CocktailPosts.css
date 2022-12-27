@@ -2,9 +2,9 @@
     width: 20%
 }
 
-.liquor_select {
+/* .liquor_select {
     width: 25%
-}
+} */
 
 .liqueur_select {
     width: 25%
@@ -30,4 +30,27 @@
 .new_cocktail_image {
     width: 18%
 }
+
+ul.liquor__list input{
+    width: 20px;
+    margin-left: 20px;
+}
+
+.liquor__boxes {
+    display: grid;
+    width: 35%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+/* .liqueur__boxes {
+    display: grid;
+    width: 35%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+} */
+
+
+
+
 

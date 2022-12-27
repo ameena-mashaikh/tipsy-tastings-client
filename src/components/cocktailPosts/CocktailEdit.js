@@ -123,6 +123,29 @@ export const CocktailEdit = () => {
         setCocktailPost(copy)
     }
 
+
+    const showWidget = (event) => {
+        event.preventDefault()
+    
+        let widget = window.cloudinary.createUploadWidget(
+            { 
+            cloudName: `dnilbxkjf`,
+            uploadPreset: `tipsy_uploads`,
+            folder: 'tipsytastings',
+            cropping: true,
+            croppingCoordinatesMode: 'custom',
+            showSkipCropButton: false
+            },
+        (error, result) => {
+          if (!error && result && result.event === "success") { 
+            console.log(result.info.url)
+            const copy = structuredClone(currentCocktail)
+            copy.image = result.info.url
+            setCurrentCocktail(copy)
+        }})
+        widget.open()
+    }
+
     const LiquorCheckboxes = () => {
         let html = []
         liquors.map((liquor) => {
@@ -312,12 +335,11 @@ export const CocktailEdit = () => {
                             }
                     </select>
                     <div> 
-                        <label className = "new_cocktail_image">Cocktail Image URL</label>
-                        <input 
-                            id = "image"
-                            onChange={changeCocktailState}
-                            value = {currentCocktail.image}
-                            type = 'text' className = "new_cocktail_image"/>
+                    <div> 
+                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
+                        <div>Image Preview: </div>
+                        <img src={currentCocktail.image} width="100px"/>
+                    </div>
                     </div>
                     <div>
                         <label className = "new_cocktail_recipe">Recipe: </label>

@@ -71,7 +71,11 @@ export const CocktailPostForm = () => {
         let widget = window.cloudinary.createUploadWidget(
             { 
             cloudName: `dnilbxkjf`,
-            uploadPreset: `tipsy_uploads`
+            uploadPreset: `tipsy_uploads`,
+            cropping: true,
+            croppingCoordinatesMode: 'custom',
+            showSkipCropButton: false,
+            folder: 'tipsytastings'
             },
         (error, result) => {
           if (!error && result && result.event === "success") { 
@@ -88,10 +92,11 @@ export const CocktailPostForm = () => {
         liquors.map((liquor) => {
             if (showLiquors) {
                 html.push(
-                    <div className = "liquor_checkboxes" key = {`liquor--${liquor.id}`}>
-                        <ul>
+                    <div className = "liquor__checkboxes" key = {`liquor--${liquor.id}`}>
+                        <ul className = "liquor__list">
                             <label>
                                 <input
+                                    className = "liquor__check"
                                     type = "checkbox"
                                     key = {`liquor--${liquor.id}`}
                                     value = {parseInt(liquor.id)}
@@ -223,7 +228,7 @@ export const CocktailPostForm = () => {
                                 }
                             }>
                                 Add Liquors</button>
-                                {LiquorCheckboxes()}
+                                <div className="liquor__boxes">{LiquorCheckboxes()}</div>
                         </div>
 
                         <div className = "liqueur_select">
@@ -234,7 +239,7 @@ export const CocktailPostForm = () => {
                                 }
                             }>
                                 Add Liqueurs</button>
-                                {LiqueurCheckboxes()}
+                                <div className="liqueur__boxes">{LiqueurCheckboxes()}</div>
                         </div>
 
                         <div className = "staple_ingredients_select">
@@ -264,7 +269,6 @@ export const CocktailPostForm = () => {
                             }
                     </select>
                     <div> 
-                        <label className = "new_cocktail_image">Cocktail Image: </label>
                         <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
                         <div>Image Preview: </div>
                         <img src={currentCocktail.image} width="100px"/>
