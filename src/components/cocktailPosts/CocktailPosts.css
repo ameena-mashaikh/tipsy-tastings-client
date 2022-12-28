@@ -6,9 +6,9 @@
     width: 25%
 } */
 
-.liqueur_select {
+/* .liqueur_select {
     width: 25%
-}
+} */
 
 .staple_ingredient_select {
     width: 25%
@@ -33,7 +33,6 @@
 
 ul.liquor__list input{
     width: 20px;
-    margin-left: 20px;
 }
 
 .liquor__boxes {
@@ -43,12 +42,19 @@ ul.liquor__list input{
     grid-template-rows: repeat(2, 1fr);
 }
 
-/* .liqueur__boxes {
+ul.liqueur__list input{
+    width: 20px;
+}
+
+.liqueur__label {
+    width: 60%
+}
+.liqueur__boxes {
     display: grid;
-    width: 35%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-} */
+    width: 80%;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
 
 
 

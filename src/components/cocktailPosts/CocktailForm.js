@@ -134,8 +134,8 @@ export const CocktailPostForm = () => {
             if (showLiqueurs) {
                 html.push(
                     <div className = "liqueur_checkboxes" key = {`liqueur--${liqueur.id}`}>
-                        <ul>
-                            <label>
+                        <ul className = "liqueur__list">
+                            <label className = "liqueur__label">
                                 <input
                                     type = "checkbox"
                                     key = {`liqueur--${liqueur.id}`}
@@ -230,6 +230,10 @@ export const CocktailPostForm = () => {
                                 Add Liquors</button>
                                 <div className="liquor__boxes">{LiquorCheckboxes()}</div>
                         </div>
+
+
+
+
 
                         <div className = "liqueur_select">
                             <button onClick={(event) => 
