@@ -131,44 +131,24 @@ export const FormCocktailTest = () => {
     }
       
 
-    // const StapleIngredientCheckboxes = () => {
-    //     let html = []
-    //     stapleIngredients.map((staple) => {
-    //         if (showStapleIngredients) {
-    //             html.push(
-    //                 <div className = "staples_checkboxes" key = {`stapleIngredients--${staple.id}`}>
-    //                     <ul>
-    //                         <label>
-    //                             <input
-    //                                 type = "checkbox"
-    //                                 key = {`stapleIngredients--${staple.id}`}
-    //                                 value = {parseInt(staple.id)}
-    //                                 onChange={(event) => {
-    //                                     const copy = new Set(selectedStapleIngredients)
-    //                                     if (copy.has(staple.id)){
-    //                                         copy.delete(staple.id)
-    //                                     }
-    //                                     else {
-    //                                         copy.add(staple.id)
-    //                                     }
-                                        
-    //                                     updateSelectedStapleIngredients(copy)
-    //                                 }
-    //                                 }
-    //                             />
-    //                             {staple.name}
-    //                         </label>
-    //                     </ul>
-    //                 </div>
-    //             )   
-    //         }
-
-    //         else {
-    //             <div></div>
-    //         }
-    //     })
-    //     return html
-    // }
+    const StapleIngredientDropdown = () => {
+        return <Select
+        placeholder = "Select Staple Ingredients"
+        options ={
+            stapleIngredients.map((staple) => {
+                return {
+                    label: staple.name,
+                    value: staple.id
+                }
+            })
+        }
+        isMulti
+        isSearchable = {true}
+        defaultValue = {selectedStapleIngredients}
+        value = {stapleIngredients.id}
+        onChange = {updateSelectedStapleIngredients}
+        />
+    }
 
 
 
@@ -194,19 +174,13 @@ export const FormCocktailTest = () => {
                             {LiqueurDropdown()}
                         </div>
 
-                        {/* 
+                        
 
                         <div className = "staple_ingredients_select">
-                            <button onClick={(event) => 
-                                {
-                                    event.preventDefault()
-                                    setShowStapleIngredients(true)
-                                }
-                            }>
-                                Add Staple Ingredients</button>
-                                {StapleIngredientCheckboxes()}
+                            
+                                {StapleIngredientDropdown()}
                         </div>
-                         */}
+                        
                     </div>
                     
                     <label className = "new_cocktail_category"> Category: </label>
@@ -277,22 +251,21 @@ export const FormCocktailTest = () => {
                                             .then(() => navigate("/my_cocktails"))
                                         })
 
-                                        // const stapleIngredientsArray = Array.from(selectedStapleIngredients)
-                                        // stapleIngredientsArray.map((stapleId) => {
-                                        //     const StapleIngredientObjToPost = {
-                                        //         cocktail: newCreatedCocktail.id,
-                                        //         staple_ingredient: stapleId
-                                        //     }
-                                        //     createCocktailStapleIngredient(StapleIngredientObjToPost)
-                                        //     .then(() => navigate("/my_cocktails"))
-                                        // })
+                                        selectedStapleIngredients.map((staple) => {
+                                            const StapleIngredientObjToPost = {
+                                                cocktail: newCreatedCocktail.id,
+                                                staple_ingredient: staple.value
+                                            }
+                                            createCocktailStapleIngredient(StapleIngredientObjToPost)
+                                            .then(() => navigate("/my_cocktails"))
+                                        })
 
-                                        // const cocktailPostObj = {
-                                        //     cocktail: newCreatedCocktail.id,
-                                        //     caption: currentCocktail.caption
-                                        // }
-                                        // createCocktailPost(cocktailPostObj)
-                                        // .then(() => navigate('/my_cocktails'))
+                                        const cocktailPostObj = {
+                                            cocktail: newCreatedCocktail.id,
+                                            caption: currentCocktail.caption
+                                        }
+                                        createCocktailPost(cocktailPostObj)
+                                        .then(() => navigate('/my_cocktails'))
                                         
 
 

@@ -7,6 +7,7 @@ import { CocktailPostForm } from "../components/cocktailPosts/CocktailForm"
 import { CocktailEdit } from "../components/cocktailPosts/CocktailEdit"
 import { CocktailFeed } from "../components/cocktail/CocktailFeed"
 import { FormCocktailTest } from "../components/cocktailPosts/FormCocktailTest"
+import { CocktailEditTest } from "../components/cocktailPosts/EditCocktailTest"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
@@ -23,7 +24,7 @@ export const ApplicationViews = ({token, setToken}) => {
                 <Route path="/explore_cocktails" element={<CocktailList />} />
                 <Route path="/cocktails/:cocktailId" element={<CocktailDetails />} />
                 <Route path="/my_cocktails/:cocktailId" element={<CocktailPostDetails />} />
-                <Route path="/my_cocktails/edit/:cocktailId" element={<CocktailEdit />} />
+                <Route path="/my_cocktails/edit/:cocktailId" element={<CocktailEditTest />} />
 
 
             </Route>
