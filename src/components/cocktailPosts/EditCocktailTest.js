@@ -12,7 +12,6 @@ import { updateCocktailPost, getCocktailPostById, getCocktailPosts } from "../..
 
 export const CocktailEditTest = () => {
     const [liquors, setLiquors] = useState([])
-    const [chosenLiquors, setChosenLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
 
@@ -20,15 +19,12 @@ export const CocktailEditTest = () => {
     const [categories, setCategories] = useState([])
     const [chosenCategory, setChosenCategory] = useState(0)
 
-    const [showLiquors, setShowLiquors] = useState(false)
-    const [showLiqueurs, setShowLiqueurs] = useState(false)
-    const [showStapleIngredients, setShowStapleIngredients] = useState(false)
+    
 
     const [selectedLiquors, updateSelectedLiquors] = useState([])
-    const [selectedLiqueurs, updateSelectedLiqueurs] = useState(new Set())
-    const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState(new Set())
+    const [selectedLiqueurs, updateSelectedLiqueurs] = useState([])
+    const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState([])
 
-    const [currentCocktailLiquors, updateCurrentCocktailLiquors] =useState([])
     const navigate = useNavigate()
     const {cocktailId} = useParams()
 
@@ -61,32 +57,30 @@ export const CocktailEditTest = () => {
         getCocktailById(cocktailId)
         .then((data)=>{
             setCurrentCocktail(data)
-//           const oldSelectedLiquors = new Set()
-        //     const oldSelectedLiqueurs = new Set()
-        //     const oldSelectedStaples = new Set()
+            const oldSelectedLiquors = [...data.liquors]
+            const oldSelectedLiqueurs = [...data.liqueurs]
+            const oldSelectedStaples = [...data.staple_ingredients]
 
-            // for (const liquor of data.liquors) {
-            //     oldSelectedLiquors.add(liquor.id)
-            // }
-            // updateSelectedLiquors(oldSelectedLiquors)
-            
-        //     for (const liqueur of data.liqueurs) {
-        //         oldSelectedLiqueurs.add(liqueur.id)
-        //     }
-        //     updateSelectedLiqueurs(oldSelectedLiqueurs)
+        updateSelectedLiquors(oldSelectedLiquors.map((liq) => ({
+            value: liq.id,
+            label: liq.label
+                }
+            ))
+        )
+        updateSelectedLiqueurs(oldSelectedLiqueurs.map((liq) => ({
+            value: liq.id,
+            label: liq.name
+                }
+            ))
+        )
+        updateSelectedStapleIngredients(oldSelectedStaples.map((staple) => ({
+            value: staple.id,
+            label: staple.name
+                }
+            ))
+        )
 
-        //     for (const staple of data.staple_ingredients) {
-        //         oldSelectedStaples.add(staple.id)  
-        //     }
-        //     updateSelectedStapleIngredients(oldSelectedStaples)
-
-        let oldSelectedLiquors = []
-        for (const liquor of data.liquors) {
-            oldSelectedLiquors.push(liquor)
-        }
-        updateSelectedLiquors(oldSelectedLiquors)
-
-            for (const post of data.post_cocktail) {
+        for (const post of data.post_cocktail) {
                 getCocktailPostById(post.id).then(setCocktailPost)
             }
         })
@@ -98,9 +92,7 @@ export const CocktailEditTest = () => {
         getLiquors().then(setLiquors)
     }, [])
 
-    useEffect(() => {
-        setChosenLiquors(currentCocktail?.liquors)
-        }, [currentCocktail])
+
         
     useEffect(() => {
         getLiqueurs().then(setLiqueurs)
@@ -136,8 +128,6 @@ export const CocktailEditTest = () => {
     }
 
 
-
-
     const showWidget = (event) => {
         event.preventDefault()
     
@@ -160,12 +150,7 @@ export const CocktailEditTest = () => {
         widget.open()
     }
 
-
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LIQUOR DROPDOWN NEED TO FIX
     const LiquorDropdown = () => {
-
-        
             return <Select
             placeholder = "Select Liquors"
             options ={
@@ -177,147 +162,54 @@ export const CocktailEditTest = () => {
                 })
             }
             isMulti
+            value={selectedLiquors}
             isSearchable = {true}
-            //defaultValue = {selectedLiquors}
-            value = {selectedLiquors}
-            onChange = {updateSelectedLiquors}
+            onChange = {(newValue, actionMeta) => {
+                updateSelectedLiquors(newValue)
+            }}
             />
-        
-        
-
-        // return <Select
-        // placeholder = "Select Liquors"
-        // options ={
-        //     liquors.map((liquor) => {
-        //         return {
-        //             label: liquor.label,
-        //             value: liquor.id
-        //         }
-        //     })
-        // }
-        // isMulti
-        // isSearchable = {true}
-        // defaultValue = {chosenLiquors.map((liquor) => {return liquor?.id})}
-        // value = {chosenLiquors}
-        // onChange={
-        //    updateSelectedLiquors}
-        //     />
-        // }
-
-        // return <Select
-        // placeholder = "Select Liquors"
-        // options ={
-        //     liquors.map((liquor) => {
-        //         return {
-        //             label: liquor.label,
-        //             value: liquor.id
-        //         }
-        //     })
-        // }
-        // isMulti
-        // isSearchable = {true}
-        // defaultValue = {liquors.map((liquor) => {return selectedLiquors.has(liquor?.id)})}
-        // value = {liquors.map((liquor) => selectedLiquors.has(liquor?.id))}
-        // onChange={(event) => {
-        //     const copy = new Set(selectedLiquors)
-        //     liquors.map((liquor) => { 
-        //     if (copy.has(liquor?.id)){
-        //         copy.delete(liquor?.id)
-        //     }
-        //     else {
-        //         copy.add(liquor?.id)
-        //     }
-        //     })
-        //     updateSelectedLiquors(copy)
-        // }
-        // }
-        // />
     }
     
+    const LiqueurDropdown = () => {
+        return <Select
+        placeholder = "Select Liquors"
+        options ={
+            liqueurs.map((liqueur) => {
+                return {
+                    label: liqueur.name,
+                    value: liqueur.id
+                }
+            })
+        }
+        isMulti
+        value={selectedLiqueurs}
+        isSearchable = {true}
+        onChange = {(newValue, actionMeta) => {
+            updateSelectedLiqueurs(newValue)
+        }}
+        />
+    }
 
+    const StapleIngredientDropdown = () => {
+        return <Select
+        placeholder = "Select Staple Ingredients"
+        options ={
+            stapleIngredients.map((staple) => {
+                return {
+                    label: staple.name,
+                    value: staple.id
+                }
+            })
+        }
+        isMulti
+        value={selectedStapleIngredients}
+        isSearchable = {true}
+        onChange = {(newValue, actionMeta) => {
+            updateSelectedStapleIngredients(newValue)
+        }}
+        />
+    }
 
-    // const LiqueurCheckboxes = () => {
-    //     let html = []
-    //     liqueurs.map((liqueur) => {
-    //         if (showLiqueurs) {
-    //             html.push(
-    //                 <div className = "liqueur_checkboxes" key = {`liqueur--${liqueur.id}`}>
-    //                     <ul>
-    //                         <label>
-    //                             <input
-    //                                 type = "checkbox"
-    //                                 key = {`liqueur--${liqueur.id}`}
-    //                                 value = {currentCocktail?.liqueurs?.id}
-    //                                 defaultChecked = {selectedLiqueurs.has(liqueur.id)}
-    //                                 checked = {selectedLiqueurs.has(liqueur.id)}
-
-    //                                 onChange={(event) => {
-    //                                     const copy = new Set(selectedLiqueurs)
-    //                                     if (copy.has(liqueur.id)){
-    //                                         copy.delete(liqueur.id)
-    //                                     }
-    //                                     else {
-    //                                         copy.add(liqueur.id)
-    //                                     }
-                                        
-    //                                     updateSelectedLiqueurs(copy)
-    //                                 }
-    //                                 }
-    //                             />
-    //                             {liqueur.name}
-    //                         </label>
-    //                     </ul>
-    //                 </div>
-    //             )   
-    //         }
-
-    //         else {
-    //             <div></div>
-    //         }
-    //     })
-    //     return html
-    // }
-
-    // const StapleIngredientCheckboxes = () => {
-    //     let html = []
-    //     stapleIngredients.map((staple) => {
-    //         if (showStapleIngredients) {
-    //             html.push(
-    //                 <div className = "staples_checkboxes" key = {`stapleIngredients--${staple.id}`}>
-    //                     <ul>
-    //                         <label>
-    //                             <input
-    //                                 type = "checkbox"
-    //                                 key = {`stapleIngredients--${staple.id}`}
-    //                                 value = {parseInt(staple.id)}
-    //                                 defaultChecked = {selectedStapleIngredients.has(staple.id)}
-    //                                 checked = {selectedStapleIngredients.has(staple.id)}
-    //                                 onChange={(event) => {
-    //                                     const copy = new Set(selectedStapleIngredients)
-    //                                     if (copy.has(staple.id)){
-    //                                         copy.delete(staple.id)
-    //                                     }
-    //                                     else {
-    //                                         copy.add(staple.id)
-    //                                     }
-                                        
-    //                                     updateSelectedStapleIngredients(copy)
-    //                                 }
-    //                                 }
-    //                             />
-    //                             {staple.name}
-    //                         </label>
-    //                     </ul>
-    //                 </div>
-    //             )   
-    //         }
-
-    //         else {
-    //             <div></div>
-    //         }
-    //     })
-    //     return html
-    // }
 
 
 
@@ -337,28 +229,13 @@ export const CocktailEditTest = () => {
                             {LiquorDropdown()}
                         </div>
 
-                        {/* <div className = "liqueur_select">
-                            <button onClick={(event) => 
-                                {
-                                    event.preventDefault()
-                                    setShowLiqueurs(true)
-                                }
-                            }>
-                                Add Liqueurs</button>
-                                {LiqueurCheckboxes()}
+                         <div className = "liqueur_select">
+                                {LiqueurDropdown()}
                         </div>
 
                         <div className = "staple_ingredients_select">
-                            <button onClick={(event) => 
-                                {
-                                    event.preventDefault()
-                                    setShowStapleIngredients(true)
-                                }
-                            }>
-                                Add Staple Ingredients</button>
-                                {StapleIngredientCheckboxes()}
-                        </div> */}
-                        
+                                {StapleIngredientDropdown()}
+                        </div>
                     </div>
                     
                     <label className = "new_cocktail_category"> Category: </label>
@@ -413,9 +290,9 @@ export const CocktailEditTest = () => {
                                     category: parseInt(chosenCategory),
                                     recipe: currentCocktail.recipe,
                                     image: currentCocktail.image,
-                                    liquors: Array.from(selectedLiquors),
-                                    liqueurs: Array.from(selectedLiqueurs),
-                                    staple_ingredients: Array.from(selectedStapleIngredients)
+                                    liquors: selectedLiquors.map((liq) => liq.value),
+                                    liqueurs: selectedLiqueurs.map((liq) => liq.value),
+                                    staple_ingredients: selectedStapleIngredients.map((staple) => staple.value)
                                         
                                 }
             
