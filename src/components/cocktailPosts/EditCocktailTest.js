@@ -24,7 +24,7 @@ export const CocktailEditTest = () => {
     const [showLiqueurs, setShowLiqueurs] = useState(false)
     const [showStapleIngredients, setShowStapleIngredients] = useState(false)
 
-    const [selectedLiquors, updateSelectedLiquors] = useState(new Set())
+    const [selectedLiquors, updateSelectedLiquors] = useState([])
     const [selectedLiqueurs, updateSelectedLiqueurs] = useState(new Set())
     const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState(new Set())
 
@@ -61,14 +61,14 @@ export const CocktailEditTest = () => {
         getCocktailById(cocktailId)
         .then((data)=>{
             setCurrentCocktail(data)
-           const oldSelectedLiquors = new Set()
+//           const oldSelectedLiquors = new Set()
         //     const oldSelectedLiqueurs = new Set()
         //     const oldSelectedStaples = new Set()
 
-            for (const liquor of data.liquors) {
-                oldSelectedLiquors.add(liquor.id)
-            }
-            updateSelectedLiquors(oldSelectedLiquors)
+            // for (const liquor of data.liquors) {
+            //     oldSelectedLiquors.add(liquor.id)
+            // }
+            // updateSelectedLiquors(oldSelectedLiquors)
             
         //     for (const liqueur of data.liqueurs) {
         //         oldSelectedLiqueurs.add(liqueur.id)
@@ -79,6 +79,12 @@ export const CocktailEditTest = () => {
         //         oldSelectedStaples.add(staple.id)  
         //     }
         //     updateSelectedStapleIngredients(oldSelectedStaples)
+
+        let oldSelectedLiquors = []
+        for (const liquor of data.liquors) {
+            oldSelectedLiquors.push(liquor)
+        }
+        updateSelectedLiquors(oldSelectedLiquors)
 
             for (const post of data.post_cocktail) {
                 getCocktailPostById(post.id).then(setCocktailPost)
@@ -130,6 +136,8 @@ export const CocktailEditTest = () => {
     }
 
 
+
+
     const showWidget = (event) => {
         event.preventDefault()
     
@@ -152,7 +160,30 @@ export const CocktailEditTest = () => {
         widget.open()
     }
 
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LIQUOR DROPDOWN NEED TO FIX
     const LiquorDropdown = () => {
+
+        
+            return <Select
+            placeholder = "Select Liquors"
+            options ={
+                liquors.map((liquor) => {
+                    return {
+                        label: liquor.label,
+                        value: liquor.id
+                    }
+                })
+            }
+            isMulti
+            isSearchable = {true}
+            //defaultValue = {selectedLiquors}
+            value = {selectedLiquors}
+            onChange = {updateSelectedLiquors}
+            />
+        
+        
 
         // return <Select
         // placeholder = "Select Liquors"
@@ -173,34 +204,34 @@ export const CocktailEditTest = () => {
         //     />
         // }
 
-        return <Select
-        placeholder = "Select Liquors"
-        options ={
-            liquors.map((liquor) => {
-                return {
-                    label: liquor.label,
-                    value: liquor.id
-                }
-            })
-        }
-        isMulti
-        isSearchable = {true}
-        defaultValue = {liquors.map((liquor) => {return selectedLiquors.has(liquor?.id)})}
-        value = {liquors.map((liquor) => selectedLiquors.has(liquor?.id))}
-        onChange={(event) => {
-            const copy = new Set(selectedLiquors)
-            liquors.map((liquor) => { 
-            if (copy.has(liquor?.id)){
-                copy.delete(liquor?.id)
-            }
-            else {
-                copy.add(liquor?.id)
-            }
-            })
-            updateSelectedLiquors(copy)
-        }
-        }
-        />
+        // return <Select
+        // placeholder = "Select Liquors"
+        // options ={
+        //     liquors.map((liquor) => {
+        //         return {
+        //             label: liquor.label,
+        //             value: liquor.id
+        //         }
+        //     })
+        // }
+        // isMulti
+        // isSearchable = {true}
+        // defaultValue = {liquors.map((liquor) => {return selectedLiquors.has(liquor?.id)})}
+        // value = {liquors.map((liquor) => selectedLiquors.has(liquor?.id))}
+        // onChange={(event) => {
+        //     const copy = new Set(selectedLiquors)
+        //     liquors.map((liquor) => { 
+        //     if (copy.has(liquor?.id)){
+        //         copy.delete(liquor?.id)
+        //     }
+        //     else {
+        //         copy.add(liquor?.id)
+        //     }
+        //     })
+        //     updateSelectedLiquors(copy)
+        // }
+        // }
+        // />
     }
     
 
