@@ -13,11 +13,7 @@ export const FormCocktailTest = () => {
     const [liquors, setLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
-    const [categories, setCategories] = useState([])
-    const [showLiquors, setShowLiquors] = useState(false)
-    const [showLiqueurs, setShowLiqueurs] = useState(false)
-    const [showStapleIngredients, setShowStapleIngredients] = useState(false)
-
+    const [categories, setCategories] = useState([])    
     const navigate = useNavigate()
 
 

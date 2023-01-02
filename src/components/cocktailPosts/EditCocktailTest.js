@@ -5,7 +5,6 @@ import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/In
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailPosts.css"
 import { updateCocktail, getCocktailById} from "../../managers/CocktailManager"
-import { updateCocktailLiqueur, updateCocktailLiquor, updateCocktailStapleIngredient, getAllCocktailLiquor, deleteCocktailLiquor, createCocktailLiquor } from "../../managers/CocktailngredientManager"
 import { updateCocktailPost, getCocktailPostById, getCocktailPosts } from "../../managers/CocktailPostManager"
 
 
@@ -15,11 +14,8 @@ export const CocktailEditTest = () => {
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
 
-
     const [categories, setCategories] = useState([])
     const [chosenCategory, setChosenCategory] = useState(0)
-
-    
 
     const [selectedLiquors, updateSelectedLiquors] = useState([])
     const [selectedLiqueurs, updateSelectedLiqueurs] = useState([])
@@ -27,9 +23,6 @@ export const CocktailEditTest = () => {
 
     const navigate = useNavigate()
     const {cocktailId} = useParams()
-
-
-    
 
     const [currentCocktail, setCurrentCocktail] = useState({
         id:0,
