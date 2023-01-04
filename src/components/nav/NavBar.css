@@ -1,4 +1,45 @@
+
+  @font-face {
+    font-family: Karimun;
+    src: url('../../fonts/Karimun.ttf') format('truetype')
+  }
+
+.homepage-link, .homepage-link:hover, .homepage-link:active {
+    font-family: 'Karimun', serif;
+    letter-spacing: .25px;
+    font-size: 45px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-left:-40%;
+    
+}
+
+/* .logo-header {
+    width: 30px;
+    height: auto;
+    margin-top: 10px;
+} */
 .navbar-start {
+    z-index: 2; 
     display: flex;
-    justify-content: space-evenly;
+    position: absolute;
+    align-items: center;
+    justify-content: space-around;
+    top: 0;
+    left: 0;
+    right: 0;
+
+
+}
+
+ .navbar-item {
+    font-size: 19px;
+    margin: 40px;
+    text-decoration: none;
+
+
+} 
+
+.navbar-all-items {
+    margin-left: -10%;
 }

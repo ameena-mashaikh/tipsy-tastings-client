@@ -1,0 +1,32 @@
+.header-image {
+    max-width:100%;
+    height: auto;
+    position: absolute;
+    top: -5%;
+    left: 0;
+    z-index: 1;
+    filter: opacity(70%) contrast(80%);
+
+}
+
+
+@font-face {
+    font-family: Karimun;
+    src: url('../../fonts/Karimun.ttf') format('truetype')
+  }
+
+.header-title {
+    position: relative;
+    z-index: 1;
+    font-family: Karimun, sans-serif;
+    font-size: 90px;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 1px -2px 5px #757575;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22.2%;
+    margin-right: 29.2%;
+}
+

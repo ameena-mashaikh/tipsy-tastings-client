@@ -32,7 +32,6 @@ export const CocktailList = () => {
           setFilterCocktail(selectionFilter)
         }, [selectedLiquor])
 
-        //&& cocktails.filter((ct) =>{return ct?.id === cocktailLiq?.cocktail?.id})
 
 
     const handleLiquorChange = (event) => {
