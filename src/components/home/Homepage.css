@@ -1,32 +1,41 @@
-.header-image {
+  @font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
+  }
+
+  @font-face {
+    font-family: DubielItalic;
+    src: url('../../fonts/DubielItalic.ttf') format('truetype')
+  }
+
+
+  .header-image {
     max-width:100%;
     height: auto;
-    position: absolute;
-    top: -5%;
+    position: fixed;
+    top: -8%;
     left: 0;
     z-index: 1;
-    filter: opacity(70%) contrast(80%);
+    filter: opacity(90%) contrast(28%);
 
 }
 
 
-@font-face {
-    font-family: Karimun;
-    src: url('../../fonts/Karimun.ttf') format('truetype')
-  }
 
-.header-title {
+
+  .header-title {
     position: relative;
     z-index: 1;
-    font-family: Karimun, sans-serif;
-    font-size: 90px;
-    font-weight: 300;
-    color: #ffffff;
-    text-shadow: 1px -2px 5px #757575;
+    font-family: Dubiel, sans-serif;
+    font-size: 80px;
+    font-weight: 500;
+    color: #ffff;
+    text-shadow: 0px 2px 5px #000000;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 22.2%;
-    margin-right: 29.2%;
+     margin-top: 21.5%;
+   /* margin-left: 2%; */
+    /* margin-top: 22.2%;
+    margin-right: 27%; */
 }
-

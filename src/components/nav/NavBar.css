@@ -1,16 +1,24 @@
-
-  @font-face {
-    font-family: Karimun;
-    src: url('../../fonts/Karimun.ttf') format('truetype')
+@font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
   }
 
+  @font-face {
+    font-family: DubielItalic;
+    src: url('../../fonts/DubielItalic.ttf') format('truetype')
+  }
+
+
 .homepage-link, .homepage-link:hover, .homepage-link:active {
-    font-family: 'Karimun', serif;
+    font-family: 'DubielI', serif;
     letter-spacing: .25px;
-    font-size: 45px;
+    font-size: 35px;
     font-weight: 400;
     text-decoration: none;
     margin-left:-40%;
+    color: white;
+    text-shadow: 0px 2px 5px #000000;
+
     
 }
 
@@ -25,9 +33,9 @@
     position: absolute;
     align-items: center;
     justify-content: space-around;
-    top: 0;
+    top: 1%;
     left: 0;
-    right: 0;
+    right: 1.5%;
 
 
 }
@@ -36,8 +44,16 @@
     font-size: 19px;
     margin: 40px;
     text-decoration: none;
+    color: white;
+    text-shadow: 0px 2px 5px #000000;
 
 
+} 
+.navbar-item:hover{
+    font-size: 19px;
+    margin: 40px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 } 
 
 .navbar-all-items {
