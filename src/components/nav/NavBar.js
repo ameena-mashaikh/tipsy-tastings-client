@@ -29,19 +29,19 @@ export const NavBar = ({ token, setToken }) => {
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
         {/* <img className = "header-logo" src = './images/logo.png'/> */}
-        <h1 className =  "logo-header"><Link className = "homepage-link"to = "/"> Tipsy Tastings </Link></h1> 
           {
             token
-              ?
+            ?<>
+            <h1 className =  "logo-header"><Link className = "homepage-link"to = "/"> Tipsy Tastings </Link></h1> 
               <div className = "navbar-all-items">
 
                 <Link to="/my_feed" className="navbar-item">My Feed</Link>
                 <Link to="/explore_cocktails" className="navbar-item">Explore Cocktails</Link>
                 <Link to="/my_cocktails" className="navbar-item">My Cocktails</Link>
                 <Link to="/profile" className="navbar-item">Profile </Link>
-
                 
               </div>
+              </>
               :
               ""
           }
@@ -54,8 +54,8 @@ export const NavBar = ({ token, setToken }) => {
                   }}>Logout</button>
                   :
                   <>
-                    <Link to="/register" className="button is-link">Register</Link>
-                    <Link to="/login" className="button is-outlined">Login</Link>
+                    {/* <Link to="/register" className="button is-link">Register</Link>
+                    <Link to="/login" className="button is-outlined">Login</Link> */}
                   </>
               }
         </div>

@@ -1,0 +1,59 @@
+
+  @font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
+  }
+
+/* 
+.section--login {
+    margin: 0;
+    display: none;
+} */
+
+img.login-image {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    filter: opacity(90%) contrast(80%);
+
+}
+
+fieldset {
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    background-color: white ;
+
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-fieldset {
+    width: 100%
+}
+h1.form-header{
+    font-family: Dubiel, serif;
+    font-size: 50px;
+}
+
+.link--register {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    margin-left: -10%;
+
+}
+
+.login-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

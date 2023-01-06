@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { registerUser } from "../../managers/AuthManager"
-// import "./Auth.css"
+import "./Register.css"
 
 export const Register = () => {
     const firstName = useRef()
@@ -38,14 +38,16 @@ export const Register = () => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-
+        <main className = "register-main" style={{ textAlign: "center" }}>
+            
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Passwords do not match</div>
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
+                <div className = 'register-form'>
+
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
@@ -76,6 +78,7 @@ export const Register = () => {
                 }}>
                     <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
                 </fieldset>
+                </div>
             </form>
             <section className="link--register">
                 Already registered? <Link to="/login">Login</Link>
