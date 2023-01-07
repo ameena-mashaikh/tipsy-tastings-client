@@ -1,0 +1,35 @@
+.explore-cocktail-image {
+    width: 70%;
+    aspect-ratio: 1/1;
+}
+
+/* .explore-cocktail-item {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+} */
+.cocktail_items {
+    display: grid;
+    grid-template-columns: repeat(3, 630px);
+    grid-template-rows: auto;
+    grid-row-gap: 40px;
+    justify-content: center;
+}
+
+
+
+.cocktail_list {
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.explore-cocktail-item {
+    display: grid;
+    justify-items: center;
+    border: 1px solid #1C6EA4;
+}

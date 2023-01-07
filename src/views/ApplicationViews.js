@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import { MyCocktailPosts } from "../components/cocktailPosts/MyCocktailPosts"
-import { CocktailList } from "../components/cocktail/CocktailList"
+import { CocktailList } from "../components/cocktail/CocktailExploreList"
 import { CocktailDetails } from "../components/cocktail/CocktailDetails"
 import { CocktailPostDetails } from "../components/cocktailPosts/CocktailPostDetails"
 import { CocktailPostForm } from "../components/cocktailPosts/CocktailForm"

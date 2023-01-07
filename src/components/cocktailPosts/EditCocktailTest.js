@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom"
 import Select from "react-select"
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailPosts.css"
+import "./CocktailPostDetails.css"
 import { updateCocktail, getCocktailById} from "../../managers/CocktailManager"
 import { updateCocktailPost, getCocktailPostById, getCocktailPosts } from "../../managers/CocktailPostManager"
 

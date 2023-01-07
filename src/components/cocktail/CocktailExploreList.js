@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktails } from "../../managers/CocktailManager"
 import { getCocktailLiquors } from "../../managers/CocktailngredientManager"
 import { getLiquors } from "../../managers/IngredientManager"
-import "./Cocktails.css"
+import "./CocktailExploreList.css"
 
 export const CocktailList = () => {
         const [cocktails, setCocktails] = useState([])
@@ -42,9 +42,9 @@ export const CocktailList = () => {
         let html = []
         if(selectedLiquor === 0 || selectedLiquor === "") {
             html.push(cocktails.map(cocktail => {
-                return <div className = "cocktail-item" key = {cocktail?.id}>
+                return <div className = "explore-cocktail-item" key = {cocktail?.id}>
                         <h3> <Link to = {`/cocktails/${cocktail?.id}`}>{cocktail?.name}</Link></h3>
-                        <img className = "cocktail-image" src= {cocktail?.image}/>
+                        <img className = "explore-cocktail-image" src= {cocktail?.image}/>
                     
                     </div>
             })
@@ -52,9 +52,9 @@ export const CocktailList = () => {
         }
        else {
             html.push(filterCocktail.map(ct => {
-                return <div className = "cocktail-item" key = {ct?.cocktail?.id}>
+                return <div className = "explore-cocktail-item" key = {ct?.cocktail?.id}>
                         <h3> <Link to = {`/cocktails/${ct?.cocktail?.id}`}>{ct?.cocktail?.name}</Link></h3>
-                        <img className = "cocktail-image" src= {ct?.cocktail?.image}/>
+                        <img className = "explore-cocktail-image" src= {ct?.cocktail?.image}/>
                     
                     </div>
             })
@@ -78,6 +78,7 @@ export const CocktailList = () => {
                     }
 
                 </select>
+                <div className = "cocktail_items">
             {
                 // filterCocktail.map(ct => {
                 //     return <div className = "cocktail-item" key = {ct?.cocktail?.id}>
@@ -88,6 +89,7 @@ export const CocktailList = () => {
                 // })
                 cocktailList()
             }
+            </div>
         </div>
             
     }

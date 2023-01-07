@@ -4,7 +4,7 @@ import Select from "react-select"
 
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailPosts.css"
+import "./CocktailPostDetails.css"
 import { createCocktail } from "../../managers/CocktailManager"
 import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
