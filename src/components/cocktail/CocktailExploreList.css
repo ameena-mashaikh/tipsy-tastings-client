@@ -1,5 +1,10 @@
-.explore-cocktail-image {
-    width: 70%;
+@font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
+  }
+
+.explore-cocktail-image, .explore-img {
+    width: 75%;
     aspect-ratio: 1/1;
 }
 
@@ -11,9 +16,10 @@
 } */
 .cocktail_items {
     display: grid;
-    grid-template-columns: repeat(3, 630px);
+    grid-template-columns: repeat(3, 600px);
     grid-template-rows: auto;
     grid-row-gap: 40px;
+    grid-column-gap: 20px;
     justify-content: center;
 }
 
@@ -25,11 +31,124 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    
+    background-color: #E7D7C9;
+      
 }
 
 .explore-cocktail-item {
     display: grid;
     justify-items: center;
-    border: 1px solid #1C6EA4;
+    /* border: 1px solid #1C6EA4; */
+    z-index: 0;
+    margin: 0px;
 }
+
+.explore-overlay {
+    z-index: 10;
+    position: fixed;
+    background-color:rgba(0,0,0,.3);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.explore-img {
+    width: 50%;
+    aspect-ratio: 1/1;
+    margin-left: 7px;
+    border-radius: 50px;
+}
+
+
+.explore-overlay-section {
+    z-index: 2;
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: rgb(255, 255, 255);
+    margin: 8%;
+    width: 38%;
+    height: 65%;
+    border-radius: 50px;
+
+}
+
+.explore-overlay-header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.explore-name-overlay {
+    font-family: Dubiel, serif;
+    font-size: 45px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: 10%;
+}
+
+.explore-close {
+    height: 60px;
+    content: "\00d7";
+    
+    
+}
+
+.overlay-details {
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: -10px;
+}
+
+.overlay-ingredients {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.overlay-middle {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+
+}
+
+.overlay-footer {
+    margin: 40px;
+    font-size: 20px;
+}
+
+/* 
+const currentCocktailIngredients = () => {
+    let html = []
+    
+    if(showOverlay) {
+        html.push(
+    <div className = "explore-cocktail-ingredients">
+    <b>Liquors Needed:</b>
+    {currentCocktail?.liquors.map(liquor => {
+        return <div key = {liquor.id}>{liquor.label}</div>
+    })}
+
+    <b>Liqueurs Needed:</b>
+    {currentCocktail?.liqueurs.map(liqueur => {
+        return <div key = {liqueur.id}>{liqueur.name}</div>
+    })}
+
+    <b>Staple Ingredients Needed:</b>
+    {currentCocktail?.staple_ingredients.map(staple => {
+        return <div key = {staple.id}>{staple.name}</div>
+        
+    })}
+    </div>)
+    }
+    return html
+} */

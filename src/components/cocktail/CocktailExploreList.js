@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import { getCocktails } from "../../managers/CocktailManager"
+import { getCocktails, getCocktailById } from "../../managers/CocktailManager"
 import { getCocktailLiquors } from "../../managers/CocktailngredientManager"
 import { getLiquors } from "../../managers/IngredientManager"
 import "./CocktailExploreList.css"
@@ -12,7 +12,12 @@ export const CocktailList = () => {
         const [liquors, setLiquors] = useState([])
         const [filterCocktail, setFilterCocktail] = useState([])
         const [selectedLiquor, updateSelectedLiquor] = useState('')
-    
+        const [cocktailId, updateCocktailId] = useState('')
+        const [currentCocktail, updateCurrentCocktail] = useState()
+        
+        const[showOverlay, setShowOverlay] = useState(false)
+        const firstUpdate = useRef(true)
+        const initialCocktail = useRef({})
         useEffect(() => {
             getCocktails().then(setCocktails)
         }, [])
@@ -21,6 +26,18 @@ export const CocktailList = () => {
             getLiquors().then(setLiquors)
         }, [])
         
+        useEffect(() => {
+            if(firstUpdate.current) {
+                firstUpdate.current = false
+            }
+            if(cocktailId === ''){
+                updateCurrentCocktail()
+            }
+            else {
+                getCocktailById(cocktailId).then(updateCurrentCocktail)
+            }
+
+        }, [cocktailId])
 
 
         useEffect(() => {
@@ -32,11 +49,21 @@ export const CocktailList = () => {
           setFilterCocktail(selectionFilter)
         }, [selectedLiquor])
 
-
+        
 
     const handleLiquorChange = (event) => {
         updateSelectedLiquor(parseInt(event.target.value))
         }
+
+    const handleCocktailChange = (event) => {
+        setShowOverlay(true)
+        updateCocktailId(event.target.id)
+    }
+
+    const handleOverlay = (event) => {
+        setShowOverlay(false)
+        updateCocktailId(0)
+    }
 
     const cocktailList = () => {
         let html = []
@@ -44,26 +71,77 @@ export const CocktailList = () => {
             html.push(cocktails.map(cocktail => {
                 return <div className = "explore-cocktail-item" key = {cocktail?.id}>
                         <h3> <Link to = {`/cocktails/${cocktail?.id}`}>{cocktail?.name}</Link></h3>
-                        <img className = "explore-cocktail-image" src= {cocktail?.image}/>
-                    
+                        <img className = "explore-cocktail-image" src= {cocktail?.image} id = {cocktail?.id}
+                        onClick = {() => {return setShowOverlay(true), updateCocktailId(parseInt(cocktail?.id))}}
+                        />
                     </div>
+                        
+
             })
-        )
+            )
         }
        else {
             html.push(filterCocktail.map(ct => {
                 return <div className = "explore-cocktail-item" key = {ct?.cocktail?.id}>
                         <h3> <Link to = {`/cocktails/${ct?.cocktail?.id}`}>{ct?.cocktail?.name}</Link></h3>
-                        <img className = "explore-cocktail-image" src= {ct?.cocktail?.image}/>
-                    
+                        <img className = "explore-cocktail-image" src= {ct?.cocktail?.image}
+                            onClick = {() => {return setShowOverlay(true), updateCocktailId(parseInt(ct?.cocktail?.id))}}
+                        />
                     </div>
             })
         )}
 
         return html
     }
-    
 
+    
+    const currentCocktailIngredients = () => {
+        return <div className = "explore-cocktail-ingredients">
+        <b>Liquors Needed:</b>
+        {currentCocktail?.liquors.map(liquor => {
+            return <div key = {liquor.id}><li>{liquor.label}</li></div>
+        })}
+
+        <b>Liqueurs Needed:</b>
+        {currentCocktail?.liqueurs.map(liqueur => {
+            return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
+        })}
+
+        <b>Staple Ingredients Needed:</b>
+        {currentCocktail?.staple_ingredients.map(staple => {
+            return <div key = {staple.id}><li>{staple.name}</li></div>
+            
+        })}
+        </div>
+    }
+
+
+    const cocktailOverlay = () => {
+        let html = []
+        if (showOverlay) {
+            html.push(
+                <div className = 'explore-overlay'>
+                    <section className = "explore-overlay-section">
+                        <header className = 'explore-overlay-header'> 
+                            <h2 className = 'explore-name-overlay'>{currentCocktail?.name}</h2>
+                            <button className = "explore-close" onClick = {() => { return setShowOverlay(false), updateCocktailId('')}}> X </button> 
+                        </header>
+                        <section className = 'overlay-middle'>
+                            <img className = "explore-img" src = {currentCocktail?.image} />
+                        <div className = 'overlay-details'> <div className = 'overlay-ingredients'>{currentCocktailIngredients()}</div>
+                               <div><b>Recipe:</b></div> {currentCocktail?.recipe}
+                        </div>
+                        </section>
+                        <footer className = 'overlay-footer'>Created By: {currentCocktail?.created_by_mixologist?.user?.username}</footer>
+                    </section>
+                </div>
+            )
+        }
+
+        return html
+    }
+    
+    // && updateCocktailId(0) && updateCurrentCocktail('')
 
     
         return <div className = "cocktail_list">
@@ -87,7 +165,12 @@ export const CocktailList = () => {
                         
                 //         </div>
                 // })
-                cocktailList()
+                cocktailList()                
+            }
+                
+            {
+                    cocktailOverlay()
+
             }
             </div>
         </div>

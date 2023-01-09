@@ -20,8 +20,10 @@
 
 }
 
-
-
+.header-section
+{
+    background-color: #e3ceb8;
+}
 
   .header-title {
     position: relative;
