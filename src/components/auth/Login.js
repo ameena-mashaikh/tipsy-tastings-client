@@ -40,10 +40,10 @@ export const Login = ({setToken}) => {
             <div className = 'login-info'>
 
         <main className="container--login">
-            {/* <dialog className="dialog dialog--auth" ref={invalidDialog}>
+            <dialog className="dialog dialog--auth" ref={invalidDialog}>
                 <div>Username or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
-            </dialog> */}
+            </dialog>
             <section className = 'login-section'>
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1 className = 'form-header'>Tipsy Tastings</h1>
