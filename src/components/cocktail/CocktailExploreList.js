@@ -96,23 +96,57 @@ export const CocktailList = () => {
 
     
     const currentCocktailIngredients = () => {
-        return <div className = "explore-cocktail-ingredients">
-        <b>Liquors Needed:</b>
-        {currentCocktail?.liquors.map(liquor => {
-            return <div key = {liquor.id}><li>{liquor.label}</li></div>
-        })}
+        let html =[]
 
-        <b>Liqueurs Needed:</b>
-        {currentCocktail?.liqueurs.map(liqueur => {
-            return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
-        })}
+        if(currentCocktail?.liquors.length > 0) {
+            html.push(<b>Liquors Needed:</b>)
+            html.push(currentCocktail?.liquors.map(liquor => {
+                return <div key = {liquor.id}><li>{liquor.label}</li></div>
+            }))
+        }
+        
+        if(currentCocktail?.liqueurs.length > 0) {
+            html.push(<b>Liqueurs Needed:</b>)
+            html.push(currentCocktail?.liqueurs.map(liqueur => {
+                return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
+            }))}
 
-        <b>Staple Ingredients Needed:</b>
-        {currentCocktail?.staple_ingredients.map(staple => {
-            return <div key = {staple.id}><li>{staple.name}</li></div>
+        if(currentCocktail?.staple_ingredients.length > 0){
+            html.push(<b>Staple Ingredients Needed:</b>)
+            html.push(currentCocktail?.staple_ingredients.map(staple => {
+                return <div key = {staple.id}><li>{staple.name}</li></div>
+                
+            }))
+        }
+        //! Syrups
+        // if(currentCocktail?.syrups.length > 0){
+        //     html.push(<b>Syrups Needed:</b>)
+        //     html.push(currentCocktail?.syrups.map(syrup => {
+        //         return <div key = {syrup.id}><li>{syrup.name}</li></div>
+                
+        //     }))
+        // }
+
+        //^Old Code
+    
+        // return <div className = "explore-cocktail-ingredients">
+        // <b>Liquors Needed:</b>
+        // {currentCocktail?.liquors.map(liquor => {
+        //     return <div key = {liquor.id}><li>{liquor.label}</li></div>
+        // })}
+
+        // <b>Liqueurs Needed:</b>
+        // {currentCocktail?.liqueurs.map(liqueur => {
+        //     return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
+        // })}
+
+        // <b>Staple Ingredients Needed:</b>
+        // {currentCocktail?.staple_ingredients.map(staple => {
+        //     return <div key = {staple.id}><li>{staple.name}</li></div>
             
-        })}
-        </div>
+        // })}
+        // </div>
+        return html
     }
 
 
@@ -146,7 +180,7 @@ export const CocktailList = () => {
         return <>
             <div className = "cocktail_list">
                 <div className = 'explore-header-select'>
-                <h2 className = 'explore-header'>Find your next favorite cocktail! 🍸︎ </h2>
+                <h2 className = 'explore-header'>🍸︎ Discover New Cocktails 🍸︎ </h2>
                 <select className = "liquors-dropdown"
                     onChange = {handleLiquorChange}>
                     <option value = "0"> Select Liquor</option>
