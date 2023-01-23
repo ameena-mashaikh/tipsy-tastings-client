@@ -127,7 +127,7 @@ export const CocktailList = () => {
                             <button className = "explore-close" onClick = {() => { return setShowOverlay(false), updateCocktailId('')}}> X </button> 
                         </header>
                         <section className = 'overlay-middle'>
-                            <img className = "explore-img" src = {currentCocktail?.image} />
+                            <img className = "overlay-img" src = {currentCocktail?.image} />
                         <div className = 'overlay-details'> <div className = 'overlay-ingredients'>{currentCocktailIngredients()}</div>
                                <div><b>Recipe:</b></div> {currentCocktail?.recipe}
                         </div>

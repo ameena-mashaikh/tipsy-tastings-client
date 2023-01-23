@@ -9,6 +9,10 @@
     border: 5px solid white
 }
 
+.explore-cocktail-image:hover {
+    cursor: pointer;
+}
+
 .cocktail_items {
     display: grid;
     grid-template-columns: repeat(3, 600px);
@@ -70,7 +74,7 @@
 
 }
 
-.explore-img {
+.overlay-img {
     width: 50%;
     aspect-ratio: 1/1;
     margin-left: 7px;
@@ -114,11 +118,21 @@
 
 .explore-close {
     height: 60px;
-    content: "\00d7";
-    
-    
+    border:none;
+    background: none;
+    position: fixed;
+    width: 38%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 40px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
+.explore-close:hover {
+    cursor: pointer;
+}
 .overlay-details {
     font-size: 18px;
     margin-left: 40px;
@@ -155,29 +169,3 @@
     justify-content: center;
     margin-left: 25%
 }
-/* 
-const currentCocktailIngredients = () => {
-    let html = []
-    
-    if(showOverlay) {
-        html.push(
-    <div className = "explore-cocktail-ingredients">
-    <b>Liquors Needed:</b>
-    {currentCocktail?.liquors.map(liquor => {
-        return <div key = {liquor.id}>{liquor.label}</div>
-    })}
-
-    <b>Liqueurs Needed:</b>
-    {currentCocktail?.liqueurs.map(liqueur => {
-        return <div key = {liqueur.id}>{liqueur.name}</div>
-    })}
-
-    <b>Staple Ingredients Needed:</b>
-    {currentCocktail?.staple_ingredients.map(staple => {
-        return <div key = {staple.id}>{staple.name}</div>
-        
-    })}
-    </div>)
-    }
-    return html
-} */
