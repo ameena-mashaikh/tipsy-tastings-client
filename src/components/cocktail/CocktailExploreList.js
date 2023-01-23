@@ -70,7 +70,7 @@ export const CocktailList = () => {
         if(selectedLiquor === 0 || selectedLiquor === "") {
             html.push(cocktails.map(cocktail => {
                 return <div className = "explore-cocktail-item" key = {cocktail?.id}>
-                        <h3> {cocktail?.name}</h3>
+                        <h3 className = 'explore-cocktail-name'> {cocktail?.name}</h3>
                         <img className = "explore-cocktail-image" src= {cocktail?.image} id = {cocktail?.id}
                         onClick = {() => {return setShowOverlay(true), updateCocktailId(parseInt(cocktail?.id))}}
                         />
@@ -141,14 +141,13 @@ export const CocktailList = () => {
         return html
     }
     
-    // && updateCocktailId(0) && updateCurrentCocktail('')
 
     
         return <>
             <div className = "cocktail_list">
                 <div className = 'explore-header-select'>
                 <h2 className = 'explore-header'>Find your next favorite cocktail! 🍸︎ </h2>
-                <select className = "liquors_dropdown"
+                <select className = "liquors-dropdown"
                     onChange = {handleLiquorChange}>
                     <option value = "0"> Select Liquor</option>
                     {

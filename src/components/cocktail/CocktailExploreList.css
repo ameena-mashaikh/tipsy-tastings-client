@@ -6,15 +6,9 @@
 .explore-cocktail-image {
     width: 75%;
     aspect-ratio: 1/1;
-    border: 4px solid white
+    border: 5px solid white
 }
 
-/* .explore-cocktail-item {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-} */
 .cocktail_items {
     display: grid;
     grid-template-columns: repeat(3, 600px);
@@ -23,6 +17,10 @@
     grid-column-gap: 20px;
     justify-content: center;
     
+}
+
+.explore-cocktail-name {
+    margin: 13px
 }
 
 .explore-header {
@@ -51,6 +49,8 @@
     font-size: 23px;
     letter-spacing: 1px;
     font-family: Dubiel;
+    padding-top: 40px;
+    
     
 }
 
@@ -75,6 +75,8 @@
     aspect-ratio: 1/1;
     margin-left: 7px;
     border-radius: 50px;
+    border: 4px solid rgb(255, 255, 255)
+
 }
 
 
@@ -84,11 +86,13 @@
     /* display: flex;
     justify-content: center;
     align-items: center; */
-    background-color: rgb(255, 255, 255);
+    background: rgb(250,210,225);
+    background: linear-gradient(148deg, rgba(250,210,225,1) 9%, rgba(253,226,228,1) 23%, rgba(223,231,253,1) 39%, rgba(205,218,253,1) 51%, rgba(190,225,230,1) 66%, rgba(214,232,232,1) 81%, rgba(223,235,233,1) 90%, rgba(226,236,233,1) 99%);
     margin: 8%;
     width: 38%;
     height: 65%;
     border-radius: 50px;
+
 
 }
 
@@ -137,6 +141,20 @@
     font-size: 20px;
 }
 
+
+.explore-header-select {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.liquors-dropdown {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin-left: 25%
+}
 /* 
 const currentCocktailIngredients = () => {
     let html = []
