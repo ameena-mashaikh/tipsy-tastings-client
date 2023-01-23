@@ -147,7 +147,7 @@ export const CocktailList = () => {
         return <>
             <div className = "cocktail_list">
                 <div className = 'explore-header-select'>
-                <h2>Find your next cocktail!</h2>
+                <h2 className = 'explore-header'>Find your next favorite cocktail! 🍸︎ </h2>
                 <select className = "liquors_dropdown"
                     onChange = {handleLiquorChange}>
                     <option value = "0"> Select Liquor</option>

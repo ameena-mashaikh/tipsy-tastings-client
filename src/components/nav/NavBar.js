@@ -32,7 +32,7 @@ export const NavBar = ({ token, setToken }) => {
           {
             token
             ?<>
-            <h1 className =  "logo-header"><Link className = "homepage-link"to = "/"> Tipsy Tastings </Link></h1> 
+            <h1 className =  "logo-header"><Link className = "homepage-link"to = "/"> Tipsy Tastings 🍸︎</Link></h1> 
               <div className = "navbar-all-items">
 
                 <Link to="/my_feed" className="navbar-item">My Feed</Link>
