@@ -70,7 +70,7 @@ export const CocktailList = () => {
         if(selectedLiquor === 0 || selectedLiquor === "") {
             html.push(cocktails.map(cocktail => {
                 return <div className = "explore-cocktail-item" key = {cocktail?.id}>
-                        <h3> <Link to = {`/cocktails/${cocktail?.id}`}>{cocktail?.name}</Link></h3>
+                        <h3> {cocktail?.name}</h3>
                         <img className = "explore-cocktail-image" src= {cocktail?.image} id = {cocktail?.id}
                         onClick = {() => {return setShowOverlay(true), updateCocktailId(parseInt(cocktail?.id))}}
                         />
@@ -83,7 +83,7 @@ export const CocktailList = () => {
        else {
             html.push(filterCocktail.map(ct => {
                 return <div className = "explore-cocktail-item" key = {ct?.cocktail?.id}>
-                        <h3> <Link to = {`/cocktails/${ct?.cocktail?.id}`}>{ct?.cocktail?.name}</Link></h3>
+                        <h3> {ct?.cocktail?.name}</h3>
                         <img className = "explore-cocktail-image" src= {ct?.cocktail?.image}
                             onClick = {() => {return setShowOverlay(true), updateCocktailId(parseInt(ct?.cocktail?.id))}}
                         />
@@ -144,7 +144,10 @@ export const CocktailList = () => {
     // && updateCocktailId(0) && updateCurrentCocktail('')
 
     
-        return <div className = "cocktail_list">
+        return <>
+            <div className = "cocktail_list">
+                <div className = 'explore-header-select'>
+                <h2>Find your next cocktail!</h2>
                 <select className = "liquors_dropdown"
                     onChange = {handleLiquorChange}>
                     <option value = "0"> Select Liquor</option>
@@ -156,23 +159,16 @@ export const CocktailList = () => {
                     }
 
                 </select>
+                </div>
                 <div className = "cocktail_items">
             {
-                // filterCocktail.map(ct => {
-                //     return <div className = "cocktail-item" key = {ct?.cocktail?.id}>
-                //             <h3> <Link to = {`/cocktails/${ct?.cocktail?.id}`}>{ct?.cocktail?.name}</Link></h3>
-                //             <img className = "cocktail-image" src= {ct?.cocktail?.image}/>
-                        
-                //         </div>
-                // })
                 cocktailList()                
-            }
-                
+            }   
             {
-                    cocktailOverlay()
+                cocktailOverlay()
 
             }
             </div>
         </div>
-            
+        </>
     }
