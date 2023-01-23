@@ -26,17 +26,17 @@ export const CocktailDetails = () => {
                             <div className = "cocktail-ingredients">
                                 <b>Liquors Needed:</b>
                                 {cocktail?.liquors.map(liquor => {
-                                    return <div>{liquor.label}</div>
+                                    return <div key = {liquor.id}>{liquor.label}</div>
                                 })}
 
                                 <b>Liqueurs Needed:</b>
                                 {cocktail?.liqueurs.map(liqueur => {
-                                    return <div>{liqueur.name}</div>
+                                    return <div key = {liqueur.id}>{liqueur.name}</div>
                                 })}
 
                                 <b>Staple Ingredients Needed:</b>
                                 {cocktail?.staple_ingredients.map(staple => {
-                                    return <div>{staple.name}</div>
+                                    return <div key = {staple.id}>{staple.name}</div>
                                 })}
                             </div>
                             <div className = "cocktail-recipe"> <b>Recipe:</b> {cocktail?.recipe}</div>

@@ -9,21 +9,17 @@ import { createCocktail } from "../../managers/CocktailManager"
 import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
 
-export const CocktailPostForm = () => {
+export const FormCocktailTest = () => {
     const [liquors, setLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
-    const [categories, setCategories] = useState([])
-    const [showLiquors, setShowLiquors] = useState(false)
-    const [showLiqueurs, setShowLiqueurs] = useState(false)
-    const [showStapleIngredients, setShowStapleIngredients] = useState(false)
-
+    const [categories, setCategories] = useState([])    
     const navigate = useNavigate()
 
 
-    const [selectedLiquors, updateSelectedLiquors] = useState(new Set())
-    const [selectedLiqueurs, updateSelectedLiqueurs] = useState(new Set())
-    const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState(new Set())
+    const [selectedLiquors, updateSelectedLiquors] = useState([])
+    const [selectedLiqueurs, updateSelectedLiqueurs] = useState([])
+    const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState([])
 
     const [currentCocktail, setCurrentCocktail] = useState({
         name: '',
@@ -87,123 +83,67 @@ export const CocktailPostForm = () => {
         widget.open()
     }
 
-    const LiquorCheckboxes = () => {
-        let html = []
-        liquors.map((liquor) => {
-            if (showLiquors) {
-                html.push(
-                    <div className = "liquor__checkboxes" key = {`liquor--${liquor.id}`}>
-                        <ul className = "liquor__list">
-                            <label>
-                                <input
-                                    className = "liquor__check"
-                                    type = "checkbox"
-                                    key = {`liquor--${liquor.id}`}
-                                    value = {parseInt(liquor.id)}
-                                    onChange={(event) => {
-                                        const copy = new Set(selectedLiquors)
-                                        if (copy.has(liquor.id)){
-                                            copy.delete(liquor.id)
-                                        }
-                                        else {
-                                            copy.add(liquor.id)
-                                        }
-                                        
-                                        updateSelectedLiquors(copy)
-                                    }
-                                    }
-                                />
-                                {liquor.label}
-                            </label>
-                        </ul>
-                    </div>
-                )   
-            }
-
-            else {
-                <div></div>
-            }
-        })
-        return html
+    const LiquorDropdown = () => {
+        return <Select
+        placeholder = "Select Liquors"
+        options ={
+            liquors.map((liquor) => {
+                return {
+                    label: liquor.label,
+                    value: liquor.id
+                }
+            })
+        }
+        isMulti
+        isSearchable = {true}
+        defaultValue = {selectedLiquors}
+        value = {liquors.id}
+        onChange = {updateSelectedLiquors}
+        />
+    
     }
+      
+                    
 
 
-    const LiqueurCheckboxes = () => {
-        let html = []
-        liqueurs.map((liqueur) => {
-            if (showLiqueurs) {
-                html.push(
-                    <div className = "liqueur_checkboxes" key = {`liqueur--${liqueur.id}`}>
-                        <ul className = "liqueur__list">
-                            <label className = "liqueur__label">
-                                <input
-                                    type = "checkbox"
-                                    key = {`liqueur--${liqueur.id}`}
-                                    value = {parseInt(liqueur.id)}
-                                    onChange={(event) => {
-                                        const copy = new Set(selectedLiqueurs)
-                                        if (copy.has(liqueur.id)){
-                                            copy.delete(liqueur.id)
-                                        }
-                                        else {
-                                            copy.add(liqueur.id)
-                                        }
-                                        
-                                        updateSelectedLiqueurs(copy)
-                                    }
-                                    }
-                                />
-                                {liqueur.name}
-                            </label>
-                        </ul>
-                    </div>
-                )   
-            }
-
-            else {
-                <div></div>
-            }
-        })
-        return html
+    const LiqueurDropdown = () => {
+        return <Select
+        placeholder = "Select Liqueurs"
+        options ={
+            liqueurs.map((liqueur) => {
+                return {
+                    label: liqueur.name,
+                    value: liqueur.id
+                }
+            })
+        }
+        isMulti
+        isSearchable = {true}
+        defaultValue = {selectedLiqueurs}
+        value = {liqueurs.id}
+        onChange = {updateSelectedLiqueurs}
+        />
+    
     }
+      
 
-    const StapleIngredientCheckboxes = () => {
-        let html = []
-        stapleIngredients.map((staple) => {
-            if (showStapleIngredients) {
-                html.push(
-                    <div className = "staples_checkboxes" key = {`stapleIngredients--${staple.id}`}>
-                        <ul>
-                            <label>
-                                <input
-                                    type = "checkbox"
-                                    key = {`stapleIngredients--${staple.id}`}
-                                    value = {parseInt(staple.id)}
-                                    onChange={(event) => {
-                                        const copy = new Set(selectedStapleIngredients)
-                                        if (copy.has(staple.id)){
-                                            copy.delete(staple.id)
-                                        }
-                                        else {
-                                            copy.add(staple.id)
-                                        }
-                                        
-                                        updateSelectedStapleIngredients(copy)
-                                    }
-                                    }
-                                />
-                                {staple.name}
-                            </label>
-                        </ul>
-                    </div>
-                )   
-            }
-
-            else {
-                <div></div>
-            }
-        })
-        return html
+    const StapleIngredientDropdown = () => {
+        return <Select
+        placeholder = "Select Staple Ingredients"
+        options ={
+            stapleIngredients.map((staple) => {
+                return {
+                    label: staple.name,
+                    value: staple.id
+                }
+            })
+        }
+        isMulti
+        isSearchable = {true}
+        defaultValue = {selectedStapleIngredients}
+        value = {stapleIngredients.id}
+        onChange = {updateSelectedStapleIngredients}
+        />
     }
 
 
@@ -221,40 +161,20 @@ export const CocktailPostForm = () => {
 
                     <div className = "ingredient_list">
                         <div className = "liquor_select">
-                            <button onClick={(event) => 
-                                {
-                                    event.preventDefault()
-                                    setShowLiquors(true)
-                                }
-                            }>
-                                Add Liquors</button>
-                                <div className="liquor__boxes">{LiquorCheckboxes()}</div>
+                            {LiquorDropdown()}
                         </div>
-
-
 
 
 
                         <div className = "liqueur_select">
-                            <button onClick={(event) => 
-                                {
-                                    event.preventDefault()
-                                    setShowLiqueurs(true)
-                                }
-                            }>
-                                Add Liqueurs</button>
-                                <div className="liqueur__boxes">{LiqueurCheckboxes()}</div>
+                            {LiqueurDropdown()}
                         </div>
 
+                        
+
                         <div className = "staple_ingredients_select">
-                            <button onClick={(event) => 
-                                {
-                                    event.preventDefault()
-                                    setShowStapleIngredients(true)
-                                }
-                            }>
-                                Add Staple Ingredients</button>
-                                {StapleIngredientCheckboxes()}
+                            
+                                {StapleIngredientDropdown()}
                         </div>
                         
                     </div>
@@ -308,31 +228,29 @@ export const CocktailPostForm = () => {
                                 // Send POST request to your API
                                 createCocktail(cocktailObj)
                                     .then((newCreatedCocktail) => {
-                                        const liquorArray = Array.from(selectedLiquors)
-                                        liquorArray.map((liquorId) => {
+                                        selectedLiquors.map((liquorId) => {
                                             const liquorObjToPost = {
                                                 cocktail: newCreatedCocktail.id,
-                                                liquor: liquorId
+                                                liquor: liquorId.value
                                             }
                                             createCocktailLiquor(liquorObjToPost)
                                             .then(() => navigate("/my_cocktails"))
                                         })
 
-                                        const liqueurArray = Array.from(selectedLiqueurs)
-                                        liqueurArray.map((liqueurId) => {
+                                        
+                                        selectedLiqueurs.map((liqueur) => {
                                             const liqueurObjToPost = {
                                                 cocktail: newCreatedCocktail.id,
-                                                liqueur: liqueurId
+                                                liqueur: liqueur.value
                                             }
                                             createCocktailLiqueur(liqueurObjToPost)
                                             .then(() => navigate("/my_cocktails"))
                                         })
 
-                                        const stapleIngredientsArray = Array.from(selectedStapleIngredients)
-                                        stapleIngredientsArray.map((stapleId) => {
+                                        selectedStapleIngredients.map((staple) => {
                                             const StapleIngredientObjToPost = {
                                                 cocktail: newCreatedCocktail.id,
-                                                staple_ingredient: stapleId
+                                                staple_ingredient: staple.value
                                             }
                                             createCocktailStapleIngredient(StapleIngredientObjToPost)
                                             .then(() => navigate("/my_cocktails"))

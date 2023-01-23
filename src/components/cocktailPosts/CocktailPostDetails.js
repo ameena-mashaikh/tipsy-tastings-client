@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktailById, deleteCocktail } from "../../managers/CocktailManager"
-import "./CocktailPosts.css"
+import "./CocktailPostDetails.css"
 
 export const CocktailPostDetails = () => {
         const {cocktailId} = useParams()

@@ -1,0 +1,171 @@
+@font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
+  }
+
+.explore-cocktail-image {
+    width: 75%;
+    aspect-ratio: 1/1;
+    border: 5px solid white
+}
+
+.explore-cocktail-image:hover {
+    cursor: pointer;
+}
+
+.cocktail_items {
+    display: grid;
+    grid-template-columns: repeat(3, 600px);
+    grid-template-rows: auto;
+    grid-row-gap: 40px;
+    grid-column-gap: 20px;
+    justify-content: center;
+    
+}
+
+.explore-cocktail-name {
+    margin: 13px
+}
+
+.explore-header {
+    font-family: Dubiel;
+    font-size: 46px;
+}
+
+
+.cocktail_list {
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* background-color: #ede7e4; */
+    
+      
+}
+
+.explore-cocktail-item {
+    display: grid;
+    justify-items: center;
+    /* border: 1px solid #1C6EA4; */
+    z-index: 0;
+    margin: 0px;
+    font-size: 23px;
+    letter-spacing: 1px;
+    font-family: Dubiel;
+    padding-top: 40px;
+    
+    
+}
+
+.explore-overlay {
+    z-index: 10;
+    position: fixed;
+    background-color:rgba(0,0,0,.3);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.overlay-img {
+    width: 50%;
+    aspect-ratio: 1/1;
+    margin-left: 7px;
+    border-radius: 50px;
+    border: 4px solid rgb(255, 255, 255)
+
+}
+
+
+.explore-overlay-section {
+    z-index: 2;
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background: rgb(250,210,225);
+    background: linear-gradient(148deg, rgba(250,210,225,1) 9%, rgba(253,226,228,1) 23%, rgba(223,231,253,1) 39%, rgba(205,218,253,1) 51%, rgba(190,225,230,1) 66%, rgba(214,232,232,1) 81%, rgba(223,235,233,1) 90%, rgba(226,236,233,1) 99%);
+    margin: 8%;
+    width: 38%;
+    height: 65%;
+    border-radius: 50px;
+
+
+}
+
+.explore-overlay-header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.explore-name-overlay {
+    font-family: Dubiel, serif;
+    font-size: 45px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: 10%;
+}
+
+.explore-close {
+    height: 60px;
+    border:none;
+    background: none;
+    position: fixed;
+    width: 38%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.explore-close:hover {
+    cursor: pointer;
+}
+.overlay-details {
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: -10px;
+}
+
+.overlay-ingredients {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.overlay-middle {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+
+}
+
+.overlay-footer {
+    margin: 40px;
+    font-size: 20px;
+}
+
+
+.explore-header-select {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.liquors-dropdown {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin-left: 25%
+}

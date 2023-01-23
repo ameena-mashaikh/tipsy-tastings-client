@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailPosts.css"
+import "./CocktailPostDetails.css"
 import { updateCocktail, getCocktailById} from "../../managers/CocktailManager"
 import { updateCocktailLiqueur, updateCocktailLiquor, updateCocktailStapleIngredient, getAllCocktailLiquor, deleteCocktailLiquor, createCocktailLiquor } from "../../managers/CocktailngredientManager"
 import { updateCocktailPost, getCocktailPostById, getCocktailPosts } from "../../managers/CocktailPostManager"
@@ -44,11 +44,13 @@ export const CocktailEdit = () => {
         staple_ingredients: []
     })
 
-    const [currentCocktailPost, setCurrentCocktailPost] = useState({
-        id:0,
-        cocktail: 0,
-        caption: ''
-    })
+    const [cocktailPost, setCocktailPost] = useState(
+        {
+            id:0,
+            cocktailId: 0,
+            caption: ''
+        }
+    )
 
 
 
@@ -76,16 +78,12 @@ export const CocktailEdit = () => {
             }
             updateSelectedStapleIngredients(oldSelectedStaples)
 
+            for (const post of data.post_cocktail) {
+                getCocktailPostById(post.id).then(setCocktailPost)
+            }
         })
     }, [cocktailId])
 
-    useEffect(() => {
-        getAllCocktailLiquor(cocktailId)
-        .then((data) => {
-            updateCurrentCocktailLiquors(data)
-        })
-    },[cocktailId])
-    
 
     
     useEffect(() => {
@@ -118,12 +116,35 @@ export const CocktailEdit = () => {
         setCurrentCocktail(copy)
     }
 
-    // const changeCocktailPostState= (domEvent) => {
-    //     const copy = {...currentCocktailPost}
-    //     const modify = domEvent.target.id
-    //     copy[modify] = domEvent.target.value
-    //     setCurrentCocktailPost(copy)
-    // }
+    const changeCocktailPostState= (domEvent) => {
+        const copy = {...cocktailPost}
+        const modify = domEvent.target.id
+        copy[modify] = domEvent.target.value
+        setCocktailPost(copy)
+    }
+
+
+    const showWidget = (event) => {
+        event.preventDefault()
+    
+        let widget = window.cloudinary.createUploadWidget(
+            { 
+            cloudName: `dnilbxkjf`,
+            uploadPreset: `tipsy_uploads`,
+            folder: 'tipsytastings',
+            cropping: true,
+            croppingCoordinatesMode: 'custom',
+            showSkipCropButton: false
+            },
+        (error, result) => {
+          if (!error && result && result.event === "success") { 
+            console.log(result.info.url)
+            const copy = structuredClone(currentCocktail)
+            copy.image = result.info.url
+            setCurrentCocktail(copy)
+        }})
+        widget.open()
+    }
 
     const LiquorCheckboxes = () => {
         let html = []
@@ -136,10 +157,6 @@ export const CocktailEdit = () => {
                                 <input
                                     type = "checkbox"
                                     key = {`liquor--${liquor.id}`}
-                                    // checked = {selectedLiquors.has(liquor.id)}
-                                    // defaultChecked = {
-                                    //     currentCocktail.liquors.find(liq => liq.id === liquor.id) ? true : false
-                                    // }
                                     defaultChecked = {selectedLiquors.has(liquor.id)}
                                     checked = {selectedLiquors.has(liquor.id)}
                                     onChange={(event) => {
@@ -147,34 +164,9 @@ export const CocktailEdit = () => {
                                         if (copy.has(liquor.id))
                                         {
                                              copy.delete(liquor.id)
-                                        //     currentCocktailLiquors.map((liq) => {
-                                        //         if (liq.liquor.id === liquor.id) {
-                                        //             return deleteCocktailLiquor(liq.id)
-                                        //         }
-                                        //         // else {
-                                        //         //     const newLiq = {
-                                        //         //         cocktail: currentCocktail.id, 
-                                        //         //         liquor: liquor.id
-                                        //         //     }
-                                        //         //     return createCocktailLiquor(newLiq)
-                                        //         // }
-                                               
-                                            
-                                        //   }
-                                        //   )                                                
-
                                         }
                                         else {
                                             copy.add(liquor.id)
-                                            // currentCocktailLiquors.map((liq) => {
-                                            //     if ((liq.liquor.id !== liquor.id )|| (liq.liquor == [])) {
-                                            //         const newLiq = {
-                                            //             cocktail: currentCocktail.id, 
-                                            //             liquor: liquor.id
-                                            //         }
-                                            //         return createCocktailLiquor(newLiq)
-                                            //     }
-                                            // })
                                         }
                                         
                                         updateSelectedLiquors(copy)
@@ -208,11 +200,6 @@ export const CocktailEdit = () => {
                                     type = "checkbox"
                                     key = {`liqueur--${liqueur.id}`}
                                     value = {currentCocktail?.liqueurs?.id}
-                                    // checked = {selectedLiqueurs.has(liqueur.id)}
-                                    // defaultChecked = {
-                                    //     currentCocktail.liqueurs.find(liq => liq.id === liqueur.id) ? true : false
-                                    // }
-
                                     defaultChecked = {selectedLiqueurs.has(liqueur.id)}
                                     checked = {selectedLiqueurs.has(liqueur.id)}
 
@@ -255,10 +242,6 @@ export const CocktailEdit = () => {
                                     type = "checkbox"
                                     key = {`stapleIngredients--${staple.id}`}
                                     value = {parseInt(staple.id)}
-                                    // checked = {selectedStapleIngredients.has(staple.id)}
-                                    // defaultChecked = {
-                                    //     currentCocktail.staple_ingredients.find(stap => stap.id === staple.id) ? true : false
-                                    // }
                                     defaultChecked = {selectedStapleIngredients.has(staple.id)}
                                     checked = {selectedStapleIngredients.has(staple.id)}
                                     onChange={(event) => {
@@ -352,12 +335,11 @@ export const CocktailEdit = () => {
                             }
                     </select>
                     <div> 
-                        <label className = "new_cocktail_image">Cocktail Image URL</label>
-                        <input 
-                            id = "image"
-                            onChange={changeCocktailState}
-                            value = {currentCocktail.image}
-                            type = 'text' className = "new_cocktail_image"/>
+                    <div> 
+                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
+                        <div>Image Preview: </div>
+                        <img src={currentCocktail.image} width="100px"/>
+                    </div>
                     </div>
                     <div>
                         <label className = "new_cocktail_recipe">Recipe: </label>
@@ -367,17 +349,17 @@ export const CocktailEdit = () => {
                             value = {currentCocktail.recipe}
                             type = 'textarea'  className = "new_cocktail_recipe"/>
                     </div>
-                    {/* <div>
+                    <div>
                         <label className = "new_cocktail_caption">Post Caption: </label>
                         <input 
                             id = "caption"
-                            value = {currentCocktailPost?.caption}
-                            onChange={event => setWrittenCaption(event.target.value)}
+                            value = {cocktailPost?.caption}
+                            onChange={changeCocktailPostState}
                             type = 'textarea' className = "new_cocktail_caption"
                             
                             
                             />
-                    </div> */}
+                    </div>
                     <div>
                         <button type ="submit" className = "submit_cocktail"
                             onClick={evt => {
@@ -398,49 +380,16 @@ export const CocktailEdit = () => {
             
                                 // Send POST request to your API
                                 updateCocktail(updateCocktailObj)
-                                .then(() => navigate("/my_cocktails"))
-                                    // .then((newlyUpdatedCocktail) => {
-                                    //     const liquorArray = Array.from(selectedLiquors)
-                                    //     const promiseLiquorArray = liquorArray.map((liquorId) => {
-                                    //         const updatedLiquorObj = {
-                                    //             id: currentCocktailLiquors.map((liquor) =>{return liquor.id}),
-                                    //             cocktail: newlyUpdatedCocktail.id,
-                                    //             liquor: liquorId
-                                    //         }
-                                    //         updateCocktailLiquor(updatedLiquorObj)
-                                    //         .then(() => navigate("/my_cocktails"))
-                                            
-                                    //     })
+                                .then((updatedCocktail) =>{
 
-                                    //     const liqueurArray = Array.from(selectedLiqueurs)
-                                    //     const promiseLiqueurArray = liqueurArray.map((liqueurId) => {
-                                    //         const updatedLiquorObj = {
-                                                
-                                    //             cocktail: newlyUpdatedCocktail.id,
-                                    //             liqueur: liqueurId
-                                    //         } 
-                                    //         updateCocktailLiqueur(updatedLiquorObj)
-                                    //         .then(() => navigate("/my_cocktails"))
-                                            
-                                    //     })
-
-                                    //     const stapleIngredientsArray = Array.from(selectedStapleIngredients)
-                                    //     const promiseStapleIngredientsArray = stapleIngredientsArray.map((stapleId) => {
-                                    //         const updatedStapleIngredientObj = {
-                                    //             cocktail: newlyUpdatedCocktail.id,
-                                    //             staple_ingredient: stapleId
-                                    //         }
-                                    //         updateCocktailStapleIngredient(updatedStapleIngredientObj)
-                                    //         .then(() => navigate("/my_cocktails"))
-                                    //     })
-
-                                    //     // const cocktailPostObj = {
-                                    //     //     cocktail: newlyUpdatedCocktail.id,
-                                    //     //     caption: writtenCaption
-                                    //     // }
-                                    //     // updateCocktailPost(cocktailPostObj)
-                                    //     // .then(() => navigate('/my_cocktails'))
-                                        
+                                    const cocktailPostObj = {
+                                        id: cocktailPost.id,
+                                        cocktailId: updateCocktail.id,
+                                        caption: cocktailPost.caption
+                                    }
+                                    updateCocktailPost(cocktailPostObj)
+                                    .then(() => navigate('/my_cocktails'))
+                                 })       
 
 
                                     // }
