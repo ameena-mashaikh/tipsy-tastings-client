@@ -1,0 +1,93 @@
+@font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
+  }
+
+.cocktail-feed-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+
+
+}
+
+.feed-header{
+    font-family: Dubiel;
+    font-size: 46px;
+    color: white;
+    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+}
+.cocktail-feed {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.cocktail-feed-item {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 30%;
+    height: auto;
+    background-color: white;
+    margin-bottom: 30px;
+    border: solid black;
+    border-width: 2px;
+}
+
+.cocktail-post-img {
+    position: relative;
+    width: 100%;
+    margin-bottom: -20px;
+}
+
+
+
+/*! WORKING LAYOUT WITH BOARDER SHOWN AROUND PICTURE
+.cocktail-feed-image {
+    width: 98%;
+    aspect-ratio: 1/1;
+    border-radius: 40px;
+
+
+}
+
+.cocktail-feed {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+
+.cocktail-feed-item {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 30%;
+    height: auto;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.cocktail-feed-post {
+    position: relative;
+    width: 100%;
+    margin: 30px;
+    margin-bottom: -20px;
+}
+*/

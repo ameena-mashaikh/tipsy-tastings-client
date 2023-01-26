@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktailById } from "../../managers/CocktailManager"
-import "./Cocktails.css"
 
 export const CocktailDetails = () => {
         const {cocktailId} = useParams()

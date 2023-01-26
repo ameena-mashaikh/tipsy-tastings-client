@@ -127,25 +127,6 @@ export const CocktailList = () => {
         //     }))
         // }
 
-        //^Old Code
-    
-        // return <div className = "explore-cocktail-ingredients">
-        // <b>Liquors Needed:</b>
-        // {currentCocktail?.liquors.map(liquor => {
-        //     return <div key = {liquor.id}><li>{liquor.label}</li></div>
-        // })}
-
-        // <b>Liqueurs Needed:</b>
-        // {currentCocktail?.liqueurs.map(liqueur => {
-        //     return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
-        // })}
-
-        // <b>Staple Ingredients Needed:</b>
-        // {currentCocktail?.staple_ingredients.map(staple => {
-        //     return <div key = {staple.id}><li>{staple.name}</li></div>
-            
-        // })}
-        // </div>
         return html
     }
 
