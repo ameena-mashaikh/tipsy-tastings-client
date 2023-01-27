@@ -13,8 +13,7 @@
 .feed-header{
     font-family: Dubiel;
     font-size: 46px;
-    color: white;
-    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+    color: black;
 }
 .cocktail-feed {
     position: absolute;
@@ -45,8 +44,26 @@
 .cocktail-post-img {
     position: relative;
     width: 100%;
-    margin-bottom: -20px;
+    margin-bottom: -10px;
 }
+
+.cocktail-feed-caption {
+    font-size: 20px
+}
+
+.feed-overlay-middle {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.feed-overlay-details {
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 20px;
+    
+}
+
 
 
 

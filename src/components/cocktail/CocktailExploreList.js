@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback, useRef } from "react"
-import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktails, getCocktailById } from "../../managers/CocktailManager"
 import { getCocktailLiquors } from "../../managers/CocktailngredientManager"
 import { getLiquors } from "../../managers/IngredientManager"
@@ -8,7 +7,6 @@ import "./CocktailExploreList.css"
 export const CocktailList = () => {
         const [cocktails, setCocktails] = useState([])
         const [cocktailLiquors, setCocktailLiquors] = useState([])
-        const navigate = useNavigate()
         const [liquors, setLiquors] = useState([])
         const [filterCocktail, setFilterCocktail] = useState([])
         const [selectedLiquor, updateSelectedLiquor] = useState('')
