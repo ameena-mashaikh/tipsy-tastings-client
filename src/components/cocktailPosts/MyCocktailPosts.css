@@ -4,16 +4,29 @@
   }
 
 .my-cocktail-image {
-    width: 20%;
+    width: 75%;
     aspect-ratio: 1/1;
 
 }
 
+
+
+.my-cocktails-page {
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;   
+
+}
+
 .all-my-cocktails {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 600px);
     grid-template-rows: auto;
     grid-row-gap: 40px;
     grid-column-gap: 20px;
-    justify-content: center;
+    justify-items: center;
+    margin-top: 70px
 }

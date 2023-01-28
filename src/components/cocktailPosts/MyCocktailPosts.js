@@ -24,14 +24,15 @@ export const MyCocktailPosts = () => {
     
     
     
-        return <div className = "mixologist_cocktails">
-            <button className = "new_cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>Add A New Cocktail Creation</button>
+        return <div className = "my-cocktails-page">
+            <header className = 'my-cocktails-header'><h2> My Cocktails </h2>
+            <button className = "new-cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>Add A New Cocktail Creation</button></header>
             <div className = 'all-my-cocktails'>
             {
                 cocktails.map(cocktail => {
-                    return <div className = "user-cocktail-item" key = {cocktail.id}>
-                            <Link to = {`/my_cocktails/${cocktail.id}`}><img className = "my-cocktail-image" src= {cocktail.image}/></Link>
-                        </div>
+                    return <>
+                            <img className = "my-cocktail-image" src= {cocktail.image} key = {cocktail.id}/>
+                        </>
                 })
             }
         </div>
