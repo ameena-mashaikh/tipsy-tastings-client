@@ -1,12 +1,13 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import Select from "react-select"
 import { getLiquors, getLiqueurs, getStapleIngredients, getSyrups } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailForm.css"
 import { createCocktail } from "../../managers/CocktailManager"
 import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
+import Select from "react-select"
+import { BulletedTextArea } from "react-bulleted-textarea"
+import "./CocktailForm.css"
 
 export const FormCocktailTest = () => {
 
@@ -40,6 +41,8 @@ export const FormCocktailTest = () => {
         caption: ''
     })
     
+
+    const bulletChar = '•'
     
     useEffect(() => {
         getLiquors().then(setLiquors)
@@ -236,20 +239,26 @@ export const FormCocktailTest = () => {
                             onChange={changeCocktailState}
                             type = 'textarea'  placeholder = 'Enter the Measurements and Recipe!'/>
                     </div>
-                    <div>
-                        <label className = "new_cocktail_caption">Post Caption: </label>
+
+                    <div className= 'cocktail_caption'>
                         <textarea 
                             onChange={changeCocktailState}
                             id = "caption"
-                            className = "new_cocktail_caption"/>
+                            className = "new-cocktail-caption"
+                            placeholder = 'Add a caption to your cocktail and share your thoughts!'
+                            />
                     </div>
                     <div className = 'form-img-upload'> 
                         <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
-                        Image Preview:
-                        <img src={currentCocktail.image} width="100px"/>
                     </div>
-                    <div>
-                        <button type ="submit" className = "submit_cocktail"
+                        <div className = 'img-preview-label'>
+                            Image Preview:
+                         </div>    
+                        <div className = 'preview-img-div'>
+                            <img src={currentCocktail.image} className = 'uploaded-img-preview'width="100px"/>
+                        </div>
+                    <div className="add_cocktail">
+                        <button type ="submit" className = "submit_btn"
                             onClick={evt => {
                                 // Prevent form from being submitted
                                 evt.preventDefault()
@@ -305,7 +314,7 @@ export const FormCocktailTest = () => {
                                     }
                                     )
                             }}
-                        > Create Cocktail Post</button>
+                        > Create New Cocktail Post</button>
                     </div>
                     
                         

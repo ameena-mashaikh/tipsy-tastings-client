@@ -66,22 +66,92 @@
     
 }
 
-.form-img-upload {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    
-}
 
 .new_cocktail_recipe {
     width: 100%;
     display: flex;
     justify-content: center;
+    height: auto;
+    margin-bottom: 40px
+
 }
 
 .new-recipe-input {
     width: 40%;
-    height: 300%;
-    display: list-item;
+    height: 300px;
+    font-size: 18px;
+}
+
+
+.form-img-upload {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form_upload_button {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    margin-bottom: 40px;
+    border-radius: 4px;
+    background-color:#f7dced;
+
+}
+
+.img-preview {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+
+.img-preview-label {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 100%;
+    font-weight: 700;
+}
+
+.uploaded-img-preview {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.preview-img-div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.cocktail_caption {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    margin-bottom: 40px
+}
+
+.new-cocktail-caption {
+    width: 40%;
+    height: 100px;
+    font-size: 18px;
+}
+
+.add_cocktail {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.submit_btn {
+    width: 30%;
+    height: 50px;
+    border-radius: 4px;
+    background-color: #f7dced;
 }
