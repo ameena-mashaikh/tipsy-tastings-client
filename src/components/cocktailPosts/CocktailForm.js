@@ -6,7 +6,7 @@ import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/In
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailForm.css"
 import { createCocktail } from "../../managers/CocktailManager"
-import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
+import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailIngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
 
 export const CocktailPostForm = () => {

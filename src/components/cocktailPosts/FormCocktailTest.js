@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom"
 import { getLiquors, getLiqueurs, getStapleIngredients, getSyrups } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
 import { createCocktail } from "../../managers/CocktailManager"
-import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
+import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient, createCocktailSyrup } from "../../managers/CocktailIngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
 import Select from "react-select"
 import { BulletedTextArea } from "react-bulleted-textarea"
@@ -190,6 +190,7 @@ export const FormCocktailTest = () => {
                 <div className = "new_cocktail">
                     <div className = 'cocktail_name'>
                         <input onChange={changeCocktailState}
+                            autoComplete="off"
                             type="text" id = 'name' 
                             required autoFocus 
                             className="form-control"
@@ -302,6 +303,14 @@ export const FormCocktailTest = () => {
                                             .then(() => navigate("/my_cocktails"))
                                         })
 
+                                        selectedSyrups.map((syrup) => {
+                                            const SyrupObjToPost = {
+                                                cocktail: newCreatedCocktail.id,
+                                                syrup: syrup.value
+                                            }
+                                            createCocktailSyrup(SyrupObjToPost)
+                                            .then(() => navigate("/my_cocktails"))
+                                        })
                                         const cocktailPostObj = {
                                             cocktail: newCreatedCocktail.id,
                                             caption: currentCocktail.caption

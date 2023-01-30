@@ -210,7 +210,7 @@ export const CocktailEditTest = () => {
     
     return (
         <form className="cocktailPostForm">
-            <h3 className = "new_cocktail_header">Edit Cocktail Post</h3>
+            <h3 className = "new_cocktail_header">Edit {currentCocktail.name} Cocktail</h3>
                 <div className = "new__cocktail">
                     <label className = "new_cocktail_label">Cocktail Name: </label>
                     <input onChange={changeCocktailState}

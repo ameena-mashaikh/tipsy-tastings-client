@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { getCocktails, getCocktailById } from "../../managers/CocktailManager"
-import { getCocktailLiquors } from "../../managers/CocktailngredientManager"
+import { getCocktailLiquors } from "../../managers/CocktailIngredientManager"
 import { getLiquors } from "../../managers/IngredientManager"
 import "./CocktailExploreList.css"
 
@@ -15,7 +15,7 @@ export const CocktailList = () => {
         
         const[showOverlay, setShowOverlay] = useState(false)
         const firstUpdate = useRef(true)
-        const initialCocktail = useRef({})
+
         useEffect(() => {
             getCocktails().then(setCocktails)
         }, [])

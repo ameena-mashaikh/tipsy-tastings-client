@@ -4,8 +4,10 @@
   }
 
 .my-cocktail-image {
-    width: 75%;
+    width: 70%;
     aspect-ratio: 1/1;
+    cursor: pointer;
+    border: 6px solid white
 
 }
 
@@ -17,8 +19,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;   
-    font-family: Dubiel;
-    font-size: 40px;
+
 
 }
 
@@ -32,3 +33,64 @@
     justify-items: center;
     margin-top: 70px
 }
+
+.my-cocktails-header {
+    font-family: Dubiel;
+    font-size: 33px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cocktail-creations {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: 34%;
+    letter-spacing: 2px;
+    left:0
+}
+
+.new-cocktail-btn {
+    width: 40%;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #dcecf7;
+    cursor: pointer;
+    font-weight: 700;
+
+}
+
+.new-cocktail-button-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.edit-delete-btns {
+    width: 45%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: -30px;
+
+}
+
+.edit-cocktail-btn {
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #dcecf7;
+    font-weight: 700;
+}
+
+.delete-cocktail-btn {
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #dcecf7;
+    width: 40%;
+    height: 30px;
+    font-weight: 700;
+}
+
