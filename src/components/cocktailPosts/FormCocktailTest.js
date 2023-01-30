@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import Select from "react-select"
-import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
+import { getLiquors, getLiqueurs, getStapleIngredients, getSyrups } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
 import "./CocktailForm.css"
 import { createCocktail } from "../../managers/CocktailManager"
@@ -10,11 +10,11 @@ import { createCocktailPost } from "../../managers/CocktailPostManager"
 
 export const FormCocktailTest = () => {
 
-    const divElement = useRef();
 
     const [liquors, setLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
+    const [syrups, setSyrups] = useState([])
     const [categories, setCategories] = useState([])    
     const navigate = useNavigate()
 
@@ -22,6 +22,7 @@ export const FormCocktailTest = () => {
     const [selectedLiquors, updateSelectedLiquors] = useState([])
     const [selectedLiqueurs, updateSelectedLiqueurs] = useState([])
     const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState([])
+    const [selectedSyrups, updateSelectedSyrups] = useState([])
 
     const [currentCocktail, setCurrentCocktail] = useState({
         name: '',
@@ -50,6 +51,10 @@ export const FormCocktailTest = () => {
 
     useEffect(() => {
         getStapleIngredients().then(setStapleIngredients)
+    }, [])
+
+    useEffect(() => {
+        getSyrups().then(setSyrups)
     }, [])
 
     useEffect(() => {
@@ -103,9 +108,7 @@ export const FormCocktailTest = () => {
         defaultValue = {selectedLiquors}
         value = {liquors.id}
         onChange = {updateSelectedLiquors}
-        menuShouldScrollIntoView={false}
-        maxMenuHeight = {120}
-        // menuPortalTarget = {document.querySelector('.liquor_select')}
+        maxMenuHeight = {300}
         />
     
     }
@@ -115,6 +118,7 @@ export const FormCocktailTest = () => {
 
     const LiqueurDropdown = () => {
         return <Select
+        className = 'liqueur-dropdown'
         placeholder = "Select Liqueurs"
         options ={
             liqueurs.map((liqueur) => {
@@ -136,6 +140,7 @@ export const FormCocktailTest = () => {
 
     const StapleIngredientDropdown = () => {
         return <Select
+        className = 'staple-dropdown'
         placeholder = "Select Staple Ingredients"
         options ={
             stapleIngredients.map((staple) => {
@@ -154,6 +159,25 @@ export const FormCocktailTest = () => {
     }
 
 
+    const SyrupDropdown = () => {
+        return <Select
+        className = 'syrup-dropdown'
+        placeholder = "Select Syrups"
+        options ={
+            syrups.map((syrup) => {
+                return {
+                    label: syrup.name,
+                    value: syrup.id
+                }
+            })
+        }
+        isMulti
+        isSearchable = {true}
+        defaultValue = {selectedSyrups}
+        value = {selectedSyrups.id}
+        onChange = {updateSelectedSyrups}
+        />
+    }
 
     
     
@@ -161,44 +185,49 @@ export const FormCocktailTest = () => {
         <form className="cocktailPostForm">
             <h3 className = "new_cocktail_header">New Cocktail Post</h3>
                 <div className = "new_cocktail">
-                    <label className = "new_cocktail_label">Cocktail Name: </label>
-                    <input onChange={changeCocktailState}
-                        type="text" id = 'name' 
-                        required autoFocus className="form-control"/>
-
+                    <div className = 'cocktail_name'>
+                        <input onChange={changeCocktailState}
+                            type="text" id = 'name' 
+                            required autoFocus 
+                            className="form-control"
+                            placeholder="Enter Cocktail Name"/>
+                    </div>
                     <div className = "ingredient_list">
+
                         <div className = "liquor_select">
                             {LiquorDropdown()}
                         </div>
-
 
 
                         <div className = "liqueur_select">
                             {LiqueurDropdown()}
                         </div>
 
-                        
 
-                        <div className = "staple_ingredients_select">
-                            
-                                {StapleIngredientDropdown()}
+                        <div className = "staples_select">
+                            {StapleIngredientDropdown()}
+                        </div>
+
+
+                        <div className = "syrups_select">
+                                {SyrupDropdown()}
                         </div>
                         
                     </div>
-                    
-                    <label className = "new_cocktail_category"> Category: </label>
-                    <select
-                            onChange={changeCocktailState}
-                            required autoFocus
-                            id = "category"
-                            className = "form-control">
-                                <option value = "0"> Select Category</option>
-                            {
-                                categories.map(category => {
-                                    return <option  key = {category.id} value = {category.id}> {category.label}</option>
-                                })
-                            }
-                    </select>
+                    <div className = 'select-category'>
+                        <select
+                                onChange={changeCocktailState}
+                                required autoFocus
+                                id = "category"
+                                className = "form-control">
+                                    <option value = "0"> Select Category</option>
+                                {
+                                    categories.map(category => {
+                                        return <option  key = {category.id} value = {category.id}> {category.label}</option>
+                                    })
+                                }
+                        </select>
+                    </div>
                     <div> 
                         <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
                         <div>Image Preview: </div>

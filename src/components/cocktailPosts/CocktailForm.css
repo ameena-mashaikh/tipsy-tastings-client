@@ -16,28 +16,51 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    font-size: 19px;
     
 }
 
+.form-control {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 39.5%;
+    font-size: 19px;
+    font-family: 'Times New Roman', Times, serif;
+}
 .new_cocktail {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%
 }
+.cocktail_name {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
 .ingredient_list {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-top: 20px
 }
 
-.liquor_select {
+.liquor_select, .liqueur_select, .staples_select, .syrups_select{
     width: 100%;
     display: flex;
     justify-content: center;
 
 }
 
-.liquor-dropdown {
+.liquor-dropdown, .liqueur-dropdown, .staple-dropdown, .syrup-dropdown  {
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.select-category {
+    display: flex;
+    justify-content: center;
+    
 }

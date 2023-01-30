@@ -25,3 +25,11 @@ export const getStapleIngredients = () => {
         .then(response => response.json())
 }
 
+export const getSyrups = () => {
+    return fetch(`http://localhost:8000/syrups`, {
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+        }
+    })
+        .then(response => response.json())
+}
