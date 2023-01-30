@@ -228,24 +228,25 @@ export const FormCocktailTest = () => {
                                 }
                         </select>
                     </div>
-                    <div> 
-                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
-                        <div>Image Preview: </div>
-                        <img src={currentCocktail.image} width="100px"/>
-                    </div>
-                    <div>
-                        <label className = "new_cocktail_recipe">Recipe: </label>
-                        <input 
+                    
+                    <div className = "new_cocktail_recipe">
+                        <textarea 
+                            className = 'new-recipe-input'
                             id = "recipe"
                             onChange={changeCocktailState}
-                            type = 'textarea'  className = "new_cocktail_recipe"/>
+                            type = 'textarea'  placeholder = 'Enter the Measurements and Recipe!'/>
                     </div>
                     <div>
                         <label className = "new_cocktail_caption">Post Caption: </label>
-                        <input 
+                        <textarea 
                             onChange={changeCocktailState}
                             id = "caption"
-                            type = 'textarea' className = "new_cocktail_caption"/>
+                            className = "new_cocktail_caption"/>
+                    </div>
+                    <div className = 'form-img-upload'> 
+                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
+                        Image Preview:
+                        <img src={currentCocktail.image} width="100px"/>
                     </div>
                     <div>
                         <button type ="submit" className = "submit_cocktail"
