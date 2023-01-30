@@ -26,7 +26,7 @@ export const MyCocktailPosts = () => {
     
         return <div className = "my-cocktails-page">
             <header className = 'my-cocktails-header'><h2> My Cocktails </h2>
-            <button className = "new-cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>Add A New Cocktail Creation</button></header>
+            <button className = "new-cocktail" onClick = {() => {navigate(`/new_cocktail`)}}>New Cocktail Post</button></header>
             <div className = 'all-my-cocktails'>
             {
                 cocktails.map(cocktail => {

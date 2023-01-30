@@ -1,15 +1,17 @@
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import Select from "react-select"
-
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailPostDetails.css"
+import "./CocktailForm.css"
 import { createCocktail } from "../../managers/CocktailManager"
 import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
 
 export const FormCocktailTest = () => {
+
+    const divElement = useRef();
+
     const [liquors, setLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
@@ -83,8 +85,10 @@ export const FormCocktailTest = () => {
         widget.open()
     }
 
+
     const LiquorDropdown = () => {
         return <Select
+        className = 'liquor-dropdown'
         placeholder = "Select Liquors"
         options ={
             liquors.map((liquor) => {
@@ -99,6 +103,9 @@ export const FormCocktailTest = () => {
         defaultValue = {selectedLiquors}
         value = {liquors.id}
         onChange = {updateSelectedLiquors}
+        menuShouldScrollIntoView={false}
+        maxMenuHeight = {120}
+        // menuPortalTarget = {document.querySelector('.liquor_select')}
         />
     
     }
@@ -153,7 +160,7 @@ export const FormCocktailTest = () => {
     return (
         <form className="cocktailPostForm">
             <h3 className = "new_cocktail_header">New Cocktail Post</h3>
-                <div className = "new__cocktail">
+                <div className = "new_cocktail">
                     <label className = "new_cocktail_label">Cocktail Name: </label>
                     <input onChange={changeCocktailState}
                         type="text" id = 'name' 
