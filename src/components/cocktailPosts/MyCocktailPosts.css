@@ -81,14 +81,14 @@
 .edit-cocktail-btn {
     cursor: pointer;
     border-radius: 4px;
-    background-color: #dcecf7;
+    background-color: #ecdcf7;
     font-weight: 700;
 }
 
 .delete-cocktail-btn {
     cursor: pointer;
     border-radius: 4px;
-    background-color: #dcecf7;
+    background-color: #ecdcf7;
     width: 40%;
     height: 30px;
     font-weight: 700;

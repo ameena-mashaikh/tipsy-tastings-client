@@ -218,7 +218,7 @@ export const FormCocktailTest = () => {
                         </div>
                         
                     </div>
-                    <div className = 'select-category'>
+                    {/* <div className = 'select-category'>
                         <select
                                 onChange={changeCocktailState}
                                 required autoFocus
@@ -231,7 +231,7 @@ export const FormCocktailTest = () => {
                                     })
                                 }
                         </select>
-                    </div>
+                    </div> */}
                     
                     <div className = "new_cocktail_recipe">
                         <textarea 
@@ -256,7 +256,7 @@ export const FormCocktailTest = () => {
                             Image Preview:
                          </div>    
                         <div className = 'preview-img-div'>
-                            <img src={currentCocktail.image} className = 'uploaded-img-preview'width="100px"/>
+                            <img src={currentCocktail.image} className = 'uploaded-img-preview' width="100px"/>
                         </div>
                     <div className="add_cocktail">
                         <button type ="submit" className = "submit_btn"
