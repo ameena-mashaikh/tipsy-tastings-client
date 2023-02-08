@@ -87,6 +87,8 @@ export const CocktailPostForm = () => {
         widget.open()
     }
 
+    
+
     const LiquorCheckboxes = () => {
         let html = []
         liquors.map((liquor) => {
@@ -279,14 +281,15 @@ export const CocktailPostForm = () => {
                     </div>
                     <div>
                         <label className = "new_cocktail_recipe">Recipe: </label>
-                        <input 
+                        <textarea 
                             id = "recipe"
                             onChange={changeCocktailState}
                             type = 'textarea'  className = "new_cocktail_recipe"/>
                     </div>
                     <div>
                         <label className = "new_cocktail_caption">Post Caption: </label>
-                        <input 
+                        <textarea
+                            style="white-space: pre-wrap;"
                             onChange={changeCocktailState}
                             id = "caption"
                             type = 'textarea' className = "new_cocktail_caption"/>

@@ -142,7 +142,7 @@ export const CocktailList = () => {
                         <section className = 'overlay-middle'>
                             <img className = "overlay-img" src = {currentCocktail?.image} />
                         <div className = 'overlay-details'> <div className = 'overlay-ingredients'>{currentCocktailIngredients()}</div>
-                               <div><b>Recipe:</b></div> {currentCocktail?.recipe}
+                               <div><b>Recipe:</b></div> <div className = 'overlay-recipe'>{currentCocktail?.recipe}</div>
                         </div>
                         </section>
                         <footer className = 'overlay-footer'>Created By: {currentCocktail?.created_by_mixologist?.user?.username}</footer>

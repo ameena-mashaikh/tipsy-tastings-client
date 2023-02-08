@@ -43,7 +43,8 @@ export const CocktailFeed = () => {
                         </header>
                         <section className = 'feed-overlay-middle'>
                             <img className = "overlay-img" src = {currentCocktail?.image} />
-                        <div className = 'feed-overlay-details'> <div className = 'overlay-ingredients'>{currentCocktailIngredients()}</div>
+                        <div className = 'feed-overlay-details' > 
+                            <div className = 'overlay-ingredients'>{currentCocktailIngredients()}</div>
                                <div><b>Recipe:</b></div> {currentCocktail?.recipe}
                         </div>
                         </section>

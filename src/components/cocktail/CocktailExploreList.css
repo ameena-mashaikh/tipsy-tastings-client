@@ -30,7 +30,7 @@
 
 .explore-header {
     font-family: Dubiel;
-    font-size: 46px;
+    font-size: 50px;
 }
 
 
@@ -136,6 +136,8 @@
     font-size: 18px;
     margin-left: 40px;
     margin-top: 20px;
+    white-space: pre-line;
+
 }
 
 .overlay-ingredients {
