@@ -25,6 +25,16 @@ export const getCocktailStapleIngredients = () => {
         .then(response => response.json())
 }
 
+export const getCocktailSyrups = () => {
+    return fetch(`http://localhost:8000/cocktailsyrups`, {
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
+
 
 export const createCocktailLiquor = (newCocktailLiquorObject) => {
     return fetch("http://localhost:8000/cocktailliquors", {
@@ -68,6 +78,20 @@ export const createCocktailStapleIngredient = (newCocktailStapleObject) => {
         .then(res => res.json())
 }
 
+export const createCocktailSyrup = (newCocktailSyrupObject) => {
+    return fetch("http://localhost:8000/cocktailsyrups", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("tt_token")}`
+
+        },
+        body: JSON.stringify(newCocktailSyrupObject)
+    })
+        .then(res => res.json())
+}
+
 
 export const updateCocktailLiquor = (cocktailLiquorObj) => {
     return fetch(`http://localhost:8000/cocktailliquors/${cocktailLiquorObj.id}`, {
@@ -102,6 +126,18 @@ export const updateCocktailStapleIngredient = (cocktailStapleObj) => {
                 "Authorization": `Token ${localStorage.getItem("tt_token")}`
             },
             body: JSON.stringify(cocktailStapleObj)
+         })
+}
+
+export const updateCocktailSyrup = (cocktailSyrupObj) => {
+    return fetch(`http://localhost:8000/cocktailstapleingredients/${cocktailSyrupObj.id}`, {
+        method: "PUT",    
+        headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tt_token")}`
+            },
+            body: JSON.stringify(cocktailSyrupObj)
          })
 }
 

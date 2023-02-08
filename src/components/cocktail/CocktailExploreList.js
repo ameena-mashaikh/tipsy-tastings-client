@@ -1,14 +1,12 @@
 import { useEffect, useState, useCallback, useRef } from "react"
-import { useParams, useNavigate, Link } from "react-router-dom"
 import { getCocktails, getCocktailById } from "../../managers/CocktailManager"
-import { getCocktailLiquors } from "../../managers/CocktailngredientManager"
+import { getCocktailLiquors } from "../../managers/CocktailIngredientManager"
 import { getLiquors } from "../../managers/IngredientManager"
 import "./CocktailExploreList.css"
 
 export const CocktailList = () => {
         const [cocktails, setCocktails] = useState([])
         const [cocktailLiquors, setCocktailLiquors] = useState([])
-        const navigate = useNavigate()
         const [liquors, setLiquors] = useState([])
         const [filterCocktail, setFilterCocktail] = useState([])
         const [selectedLiquor, updateSelectedLiquor] = useState('')
@@ -17,7 +15,7 @@ export const CocktailList = () => {
         
         const[showOverlay, setShowOverlay] = useState(false)
         const firstUpdate = useRef(true)
-        const initialCocktail = useRef({})
+
         useEffect(() => {
             getCocktails().then(setCocktails)
         }, [])
@@ -96,23 +94,38 @@ export const CocktailList = () => {
 
     
     const currentCocktailIngredients = () => {
-        return <div className = "explore-cocktail-ingredients">
-        <b>Liquors Needed:</b>
-        {currentCocktail?.liquors.map(liquor => {
-            return <div key = {liquor.id}><li>{liquor.label}</li></div>
-        })}
+        let html =[]
 
-        <b>Liqueurs Needed:</b>
-        {currentCocktail?.liqueurs.map(liqueur => {
-            return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
-        })}
+        if(currentCocktail?.liquors.length > 0) {
+            html.push(<b>Liquors Needed:</b>)
+            html.push(currentCocktail?.liquors.map(liquor => {
+                return <div key = {liquor.id}><li>{liquor.label}</li></div>
+            }))
+        }
+        
+        if(currentCocktail?.liqueurs.length > 0) {
+            html.push(<b>Liqueurs Needed:</b>)
+            html.push(currentCocktail?.liqueurs.map(liqueur => {
+                return <div key = {liqueur.id}><li>{liqueur.name}</li></div>
+            }))}
 
-        <b>Staple Ingredients Needed:</b>
-        {currentCocktail?.staple_ingredients.map(staple => {
-            return <div key = {staple.id}><li>{staple.name}</li></div>
-            
-        })}
-        </div>
+        if(currentCocktail?.staple_ingredients.length > 0){
+            html.push(<b>Staple Ingredients Needed:</b>)
+            html.push(currentCocktail?.staple_ingredients.map(staple => {
+                return <div key = {staple.id}><li>{staple.name}</li></div>
+                
+            }))
+        }
+        //! Syrups
+        // if(currentCocktail?.syrups.length > 0){
+        //     html.push(<b>Syrups Needed:</b>)
+        //     html.push(currentCocktail?.syrups.map(syrup => {
+        //         return <div key = {syrup.id}><li>{syrup.name}</li></div>
+                
+        //     }))
+        // }
+
+        return html
     }
 
 
@@ -129,7 +142,7 @@ export const CocktailList = () => {
                         <section className = 'overlay-middle'>
                             <img className = "overlay-img" src = {currentCocktail?.image} />
                         <div className = 'overlay-details'> <div className = 'overlay-ingredients'>{currentCocktailIngredients()}</div>
-                               <div><b>Recipe:</b></div> {currentCocktail?.recipe}
+                               <div><b>Recipe:</b></div> <div className = 'overlay-recipe'>{currentCocktail?.recipe}</div>
                         </div>
                         </section>
                         <footer className = 'overlay-footer'>Created By: {currentCocktail?.created_by_mixologist?.user?.username}</footer>
@@ -146,7 +159,7 @@ export const CocktailList = () => {
         return <>
             <div className = "cocktail_list">
                 <div className = 'explore-header-select'>
-                <h2 className = 'explore-header'>Find your next favorite cocktail! 🍸︎ </h2>
+                <h2 className = 'explore-header'>🍸︎ Discover New Cocktails 🍸︎ </h2>
                 <select className = "liquors-dropdown"
                     onChange = {handleLiquorChange}>
                     <option value = "0"> Select Liquor</option>

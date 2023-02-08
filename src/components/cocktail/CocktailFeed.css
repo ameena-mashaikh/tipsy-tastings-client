@@ -1,0 +1,70 @@
+@font-face {
+    font-family: Dubiel;
+    src: url('../../fonts/Dubiel.ttf') format('truetype')
+  }
+
+.cocktail-feed-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+
+
+}
+
+.feed-header{
+    font-family: Dubiel;
+    font-size: 46px;
+    color: black;
+    margin-bottom: 6%;
+}
+.cocktail-feed {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.cocktail-feed-item {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 30%;
+    height: auto;
+    background-color: white;
+    margin-bottom: 30px;
+    border: solid black;
+    border-width: 3px;
+}
+
+.cocktail-post-img {
+    position: relative;
+    width: 100%;
+    margin-bottom: -10px;
+}
+
+.cocktail-feed-caption {
+    font-size: 20px
+}
+
+.feed-overlay-middle {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.feed-overlay-details {
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 20px;
+    white-space: pre-line;
+    
+    
+}
+

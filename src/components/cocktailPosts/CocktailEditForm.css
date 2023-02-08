@@ -1,0 +1,22 @@
+.update-btn {
+    width: 10%;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #f7dced;
+    margin-right: 15px;
+}
+
+.cancel-btn {
+    width: 10%;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #f7dced;
+    margin-left: 15px;
+
+}
+
+.update_cocktail {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+}

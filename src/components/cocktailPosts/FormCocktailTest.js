@@ -1,18 +1,21 @@
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import Select from "react-select"
-
-import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
+import { getLiquors, getLiqueurs, getStapleIngredients, getSyrups } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailPostDetails.css"
 import { createCocktail } from "../../managers/CocktailManager"
-import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
+import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient, createCocktailSyrup } from "../../managers/CocktailIngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
+import Select from "react-select"
+import { BulletedTextArea } from "react-bulleted-textarea"
+import "./CocktailForm.css"
 
 export const FormCocktailTest = () => {
+
+
     const [liquors, setLiquors] = useState([])
     const [liqueurs, setLiqueurs] = useState([])
     const [stapleIngredients, setStapleIngredients] = useState([])
+    const [syrups, setSyrups] = useState([])
     const [categories, setCategories] = useState([])    
     const navigate = useNavigate()
 
@@ -20,6 +23,7 @@ export const FormCocktailTest = () => {
     const [selectedLiquors, updateSelectedLiquors] = useState([])
     const [selectedLiqueurs, updateSelectedLiqueurs] = useState([])
     const [selectedStapleIngredients, updateSelectedStapleIngredients] = useState([])
+    const [selectedSyrups, updateSelectedSyrups] = useState([])
 
     const [currentCocktail, setCurrentCocktail] = useState({
         name: '',
@@ -37,6 +41,8 @@ export const FormCocktailTest = () => {
         caption: ''
     })
     
+
+    const bulletChar = '•'
     
     useEffect(() => {
         getLiquors().then(setLiquors)
@@ -48,6 +54,10 @@ export const FormCocktailTest = () => {
 
     useEffect(() => {
         getStapleIngredients().then(setStapleIngredients)
+    }, [])
+
+    useEffect(() => {
+        getSyrups().then(setSyrups)
     }, [])
 
     useEffect(() => {
@@ -83,8 +93,10 @@ export const FormCocktailTest = () => {
         widget.open()
     }
 
+
     const LiquorDropdown = () => {
         return <Select
+        className = 'liquor-dropdown'
         placeholder = "Select Liquors"
         options ={
             liquors.map((liquor) => {
@@ -99,6 +111,7 @@ export const FormCocktailTest = () => {
         defaultValue = {selectedLiquors}
         value = {liquors.id}
         onChange = {updateSelectedLiquors}
+        maxMenuHeight = {300}
         />
     
     }
@@ -108,6 +121,7 @@ export const FormCocktailTest = () => {
 
     const LiqueurDropdown = () => {
         return <Select
+        className = 'liqueur-dropdown'
         placeholder = "Select Liqueurs"
         options ={
             liqueurs.map((liqueur) => {
@@ -129,6 +143,7 @@ export const FormCocktailTest = () => {
 
     const StapleIngredientDropdown = () => {
         return <Select
+        className = 'staple-dropdown'
         placeholder = "Select Staple Ingredients"
         options ={
             stapleIngredients.map((staple) => {
@@ -147,72 +162,104 @@ export const FormCocktailTest = () => {
     }
 
 
+    const SyrupDropdown = () => {
+        return <Select
+        className = 'syrup-dropdown'
+        placeholder = "Select Syrups"
+        options ={
+            syrups.map((syrup) => {
+                return {
+                    label: syrup.name,
+                    value: syrup.id
+                }
+            })
+        }
+        isMulti
+        isSearchable = {true}
+        defaultValue = {selectedSyrups}
+        value = {selectedSyrups.id}
+        onChange = {updateSelectedSyrups}
+        />
+    }
 
     
     
     return (
         <form className="cocktailPostForm">
             <h3 className = "new_cocktail_header">New Cocktail Post</h3>
-                <div className = "new__cocktail">
-                    <label className = "new_cocktail_label">Cocktail Name: </label>
-                    <input onChange={changeCocktailState}
-                        type="text" id = 'name' 
-                        required autoFocus className="form-control"/>
-
+                <div className = "new_cocktail">
+                    <div className = 'cocktail_name'>
+                        <input onChange={changeCocktailState}
+                            autoComplete="off"
+                            type="text" id = 'name' 
+                            required autoFocus 
+                            className="form-control"
+                            placeholder="Enter Cocktail Name"/>
+                    </div>
                     <div className = "ingredient_list">
+
                         <div className = "liquor_select">
                             {LiquorDropdown()}
                         </div>
-
 
 
                         <div className = "liqueur_select">
                             {LiqueurDropdown()}
                         </div>
 
-                        
 
-                        <div className = "staple_ingredients_select">
-                            
-                                {StapleIngredientDropdown()}
+                        <div className = "staples_select">
+                            {StapleIngredientDropdown()}
+                        </div>
+
+
+                        <div className = "syrups_select">
+                                {SyrupDropdown()}
                         </div>
                         
                     </div>
-                    
-                    <label className = "new_cocktail_category"> Category: </label>
-                    <select
-                            onChange={changeCocktailState}
-                            required autoFocus
-                            id = "category"
-                            className = "form-control">
-                                <option value = "0"> Select Category</option>
-                            {
-                                categories.map(category => {
-                                    return <option  key = {category.id} value = {category.id}> {category.label}</option>
-                                })
-                            }
-                    </select>
-                    <div> 
-                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
-                        <div>Image Preview: </div>
-                        <img src={currentCocktail.image} width="100px"/>
+                    <div className = 'select-category'>
+                        <select
+                                onChange={changeCocktailState}
+                                required autoFocus
+                                id = "category"
+                                className = "form-control">
+                                    <option value = "0"> Select Category</option>
+                                {
+                                    categories.map(category => {
+                                        return <option  key = {category.id} value = {category.id}> {category.label}</option>
+                                    })
+                                }
+                        </select>
                     </div>
-                    <div>
-                        <label className = "new_cocktail_recipe">Recipe: </label>
-                        <input 
+                    
+                    <div className = "new_cocktail_recipe">
+                        <textarea 
+                            className = 'new-recipe-input'
                             id = "recipe"
                             onChange={changeCocktailState}
-                            type = 'textarea'  className = "new_cocktail_recipe"/>
+                            type = 'textarea'  placeholder = 'Enter the Measurements and Recipe!'/>
                     </div>
-                    <div>
-                        <label className = "new_cocktail_caption">Post Caption: </label>
-                        <input 
+
+                    <div className= 'cocktail_caption'>
+                        <textarea 
                             onChange={changeCocktailState}
                             id = "caption"
-                            type = 'textarea' className = "new_cocktail_caption"/>
+                            className = "new-cocktail-caption"
+                            placeholder = 'Add a caption to your cocktail and share your thoughts!'
+                            />
                     </div>
-                    <div>
-                        <button type ="submit" className = "submit_cocktail"
+                    <div className = 'form-img-upload'> 
+                        <button className="form_upload_button" onClick={(evt) => showWidget(evt)}>Upload Image</button>
+                    </div>
+                        <div className = 'img-preview-label'>
+                            Image Preview:
+                         </div>    
+                        <div className = 'preview-img-div'>
+                            <img src={currentCocktail.image} className = 'uploaded-img-preview' width="100px"/>
+                        </div>
+                    <div className="add_cocktail">
+                        <button type ="submit" className = "submit_btn"
                             onClick={evt => {
                                 // Prevent form from being submitted
                                 evt.preventDefault()
@@ -256,6 +303,14 @@ export const FormCocktailTest = () => {
                                             .then(() => navigate("/my_cocktails"))
                                         })
 
+                                        selectedSyrups.map((syrup) => {
+                                            const SyrupObjToPost = {
+                                                cocktail: newCreatedCocktail.id,
+                                                syrup: syrup.value
+                                            }
+                                            createCocktailSyrup(SyrupObjToPost)
+                                            .then(() => navigate("/my_cocktails"))
+                                        })
                                         const cocktailPostObj = {
                                             cocktail: newCreatedCocktail.id,
                                             caption: currentCocktail.caption
@@ -268,7 +323,7 @@ export const FormCocktailTest = () => {
                                     }
                                     )
                             }}
-                        > Create Cocktail Post</button>
+                        > Create New Cocktail Post</button>
                     </div>
                     
                         

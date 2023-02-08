@@ -4,9 +4,9 @@ import Select from "react-select"
 
 import { getLiquors, getLiqueurs, getStapleIngredients } from "../../managers/IngredientManager"
 import { getCategories } from "../../managers/CategoryManager"
-import "./CocktailPostDetails.css"
+import "./CocktailForm.css"
 import { createCocktail } from "../../managers/CocktailManager"
-import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailngredientManager"
+import { createCocktailLiqueur, createCocktailLiquor, createCocktailStapleIngredient } from "../../managers/CocktailIngredientManager"
 import { createCocktailPost } from "../../managers/CocktailPostManager"
 
 export const CocktailPostForm = () => {
@@ -86,6 +86,8 @@ export const CocktailPostForm = () => {
         }})
         widget.open()
     }
+
+    
 
     const LiquorCheckboxes = () => {
         let html = []
@@ -212,8 +214,8 @@ export const CocktailPostForm = () => {
     
     return (
         <form className="cocktailPostForm">
-            <h3 className = "new_cocktail_header">New Cocktail Post</h3>
-                <div className = "new__cocktail">
+            <h1 className = "new_cocktail_header">New Cocktail Post</h1>
+                <div className = "new_cocktail">
                     <label className = "new_cocktail_label">Cocktail Name: </label>
                     <input onChange={changeCocktailState}
                         type="text" id = 'name' 
@@ -279,14 +281,15 @@ export const CocktailPostForm = () => {
                     </div>
                     <div>
                         <label className = "new_cocktail_recipe">Recipe: </label>
-                        <input 
+                        <textarea 
                             id = "recipe"
                             onChange={changeCocktailState}
                             type = 'textarea'  className = "new_cocktail_recipe"/>
                     </div>
                     <div>
                         <label className = "new_cocktail_caption">Post Caption: </label>
-                        <input 
+                        <textarea
+                            style="white-space: pre-wrap;"
                             onChange={changeCocktailState}
                             id = "caption"
                             type = 'textarea' className = "new_cocktail_caption"/>
