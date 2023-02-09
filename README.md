@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Tipsy Tastings
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tipsy Tastings is a place for users to share their cocktail creations and discover new cocktails in our cocktail database!
 
-## Available Scripts
+## Application Overview
 
-In the project directory, you can run:
+Finding inspiration for your next cocktail creation can be difficult, especially since there are not many cocktail databases that showcase creative cocktails from different users aside from your typical classic cocktails like the moscow mule. Tipsy Tastings was designed to allow users to add their cocktail creations to a large database, but also to a smaller database that consists of only their cocktails. Just like Instagram, users will have their own page filled with pictures of their own cocktails and captions for each pictures. Other users can see these posts and create their own!
 
-### `npm start`
+This project is my fullstack capstone, the culmination of a 6-month long intensive full-stack coding bootcamp. My goals for this capstone were to explore and get a better understanding of server side concepts by increasing its responsibility in terms of the logic that is incorporated rather than implementing that same logic on the client side. I also wanted to get a better understanding of CSS styling concepts and React regarding state. The layout I used for my website to view each of the cocktail recipes is something new and challenging I had not done before.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Users can create/edit/delete their own cocktail creations and posts on their profile.
+- Users can view cocktails created by other users and view the recipe and ingredients.
+- Users can explore new cocktails either on the Cocktail Discovery page, or the main feed page where the 10 most recently added cocktails will be shown.
+- Users can also filter cocktails on the Cocktail Discovery page based on the kind of liquor. If they were to select vodka, all of the vodka cocktails would appear as a result.
 
-### `npm test`
+## Technology Used
+![cloudinary_logo_blue_0720](https://user-images.githubusercontent.com/98846407/217888626-aabbae4e-1342-4013-a9af-8168c0a18ef9.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![html_js_css_logos](https://www.pngitem.com/pimgs/m/476-4768356_html-css-javascript-logo-clipart-png-download-html.png)
 
-### `npm run build`
+![react_logo](https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![python_logo](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/2560px-Python_logo_and_wordmark.svg.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![django_logo](https://image.pngaaa.com/390/4169390-middle.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running This Application
+**Start Client Side**
+1. Clone this repository and change to this directory in the terminal.
+```
+git clone git@github.com:ameena-mashaikh/tipsy-tastings-client.git
+cd tipsy-tastings-client
+```
+2. Start the development server
+```
+npm install --save react-router-dom
+npm start
+```
 
-### `npm run eject`
+**Start Server Side**
+1. Clone the server repository and change to that directory in the terminal.
+```
+git clone git@github.com:ameena-mashaikh/tipsy-tastings-server.git
+cd tipsy-tastings-server
+```
+2. Start the virtual environment
+```
+pipenv shell
+```
+3. Start the debugger to run the server
+```
+python manage.py shell
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Demo User Login
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Demo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ERD
