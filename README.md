@@ -24,7 +24,7 @@ This project is my fullstack capstone, the culmination of a 6-month long intensi
 
 <img src = "https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" width = "325" height = "110" />
 
-![django_logo](https://image.pngaaa.com/390/4169390-middle.png)
+<img src = "https://www.djangoproject.com/m/img/logos/django-logo-negative.png" width = "325" height = "147" />
 
 ## Running This Application
 **Start Client Side**
