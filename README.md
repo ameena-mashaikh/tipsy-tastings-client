@@ -18,7 +18,7 @@ This project is my fullstack capstone, the culmination of a 6-month long intensi
 ## Technology Used
 ![cloudinary_logo_blue_0720](https://user-images.githubusercontent.com/98846407/217888626-aabbae4e-1342-4013-a9af-8168c0a18ef9.png)
 
-![html_js_css_logos](https://www.pngitem.com/pimgs/m/476-4768356_html-css-javascript-logo-clipart-png-download-html.png)
+![html_js_css_logos](https://www.pngitem.com/pimgs/m/476-4768356_html-css-javascript-logo-clipart-png-download-html.png = 325x197)
 
 ![react_logo](https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png)
 
