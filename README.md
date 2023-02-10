@@ -22,7 +22,7 @@ This project is my fullstack capstone, the culmination of a 6-month long intensi
 
 <img src = "https://logos-download.com/wp-content/uploads/2016/09/React_logo_wordmark.png" width = "325" height = "109"/>
 
-![python_logo](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/2560px-Python_logo_and_wordmark.svg.png)
+<img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/2560px-Python_logo_and_wordmark.svg.png" width = "325" height = "197" />
 
 ![django_logo](https://image.pngaaa.com/390/4169390-middle.png)
 
