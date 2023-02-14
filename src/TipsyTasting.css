@@ -1,5 +1,33 @@
 html {
     background: rgb(250,210,225);
-background: linear-gradient(148deg, rgba(250,210,225,1) 9%, rgba(253,226,228,1) 23%, rgba(223,231,253,1) 39%, rgba(205,218,253,1) 51%, rgba(190,225,230,1) 66%, rgba(214,232,232,1) 81%, rgba(223,235,233,1) 90%, rgba(226,236,233,1) 99%);
+    background: linear-gradient(148deg, rgba(250,210,225,1) 9%, rgba(253,226,228,1) 23%, rgba(223,231,253,1) 39%, rgba(205,218,253,1) 51%, rgba(190,225,230,1) 66%, rgba(214,232,232,1) 81%, rgba(223,235,233,1) 90%, rgba(226,236,233,1) 99%);
+    
+    
 }
 
+/* html {
+    LIGHT YELLOWS ORANGE TO BLUE
+    background: rgb(205,226,244);
+background: linear-gradient(328deg, rgba(205,226,244,1) 2%, rgba(222,236,248,1) 12%, rgba(227,239,249,1) 28%, rgba(236,244,251,1) 41%, rgba(246,247,248,1) 51%, rgba(251,248,243,1) 58%, rgba(255,248,238,1) 66%, rgba(255,245,232,1) 75%, rgba(255,237,215,1) 88%, rgba(255,240,221,1) 100%);
+} */
+
+/*
+WEIRD RED GRADIENT 
+background: rgb(244,241,236);
+background: radial-gradient(circle, rgba(244,241,236,1) 1%, rgba(235,229,218,1) 16%, rgba(229,221,206,1) 26%, rgba(233,217,208,1) 39%, rgba(236,215,210,1) 48%, rgba(224,196,191,1) 56%, rgba(215,182,177,1) 66%, rgba(206,168,163,1) 73%, rgba(198,156,150,1) 83%, rgba(185,146,145,1) 91%, rgba(160,127,136,1) 100%); 
+
+*/
+
+
+/* 
+Considering this one, light pinks/purple with yellow in middle
+background: rgb(249,249,247);
+background: radial-gradient(circle, rgba(249,249,247,1) 0%, rgba(247,245,236,1) 10%, rgba(234,238,227,1) 20%, rgba(224,233,225,1) 33%, rgba(222,229,224,1) 45%, rgba(220,226,223,1) 55%, rgba(215,219,223,1) 69%, rgba(209,211,223,1) 78%, rgba(212,209,222,1) 89%, rgba(228,217,228,1) 100%); 
+
+
+ORIGINAL
+background: rgb(250,210,225);
+background: linear-gradient(148deg, rgba(250,210,225,1) 9%, rgba(253,226,228,1) 23%, rgba(223,231,253,1) 39%, rgba(205,218,253,1) 51%, rgba(190,225,230,1) 66%, rgba(214,232,232,1) 81%, rgba(223,235,233,1) 90%, rgba(226,236,233,1) 99%);
+
+
+*/

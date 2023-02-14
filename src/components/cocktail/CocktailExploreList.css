@@ -17,9 +17,10 @@
     display: grid;
     grid-template-columns: repeat(3, 600px);
     grid-template-rows: auto;
-    grid-row-gap: 40px;
+    grid-row-gap: 20px;
     grid-column-gap: 20px;
     justify-content: center;
+    margin-bottom: 40px;
     
 }
 
@@ -74,7 +75,7 @@
 
 .overlay-img {
     width: 50%;
-    height: auto;
+    height:50%;
     aspect-ratio: 1/1;
     margin-left: 7px;
     border-radius: 50px;
@@ -92,8 +93,8 @@
     background: rgb(250,210,225);
     background: linear-gradient(148deg, rgba(250,210,225,1) 9%, rgba(253,226,228,1) 23%, rgba(223,231,253,1) 39%, rgba(205,218,253,1) 51%, rgba(190,225,230,1) 66%, rgba(214,232,232,1) 81%, rgba(223,235,233,1) 90%, rgba(226,236,233,1) 99%);
     margin: 8%;
-    width: 38%;
-    height: 65%;
+    width: 45%;
+    height: 75%;
     border-radius: 50px;
 
 
@@ -124,8 +125,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-right: 40px;
-    font-size: 18px;
+    margin-left: 80px;
+    font-size: 20px;
     font-weight: 600;
 }
 
