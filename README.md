@@ -55,7 +55,14 @@ python manage.py shell
 ```
 
 ## Demo User Login
+To view the application as a registered user, please sign in using one of the following users:
 
-## Demo
+| User | Username | Password |
+|-----|---------|---------|
+|     1|tohruh      | tohru   |
+|     2|shiguresohma | shigure |
+|     3|hinatashoyo |  hinata        |
+|     4|oikawatoru |       oikawa    |
+|     5|fushiguromegumi| fushiguro |
 
-## ERD
+OR register and sign in as a new user
